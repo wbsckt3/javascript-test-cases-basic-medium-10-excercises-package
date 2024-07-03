@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Test Cases with Mocha and Chai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.4.0/mocha.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.3/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
+    <link rel="stylesheet" href="https://wbsckt3.github.io/mocha_test_cases_styles_2/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.3/dist/vuetify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.4.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="editor-container">
+        <textarea id="code-editor">
+const shape = {
+	out1(arr, callback) {
+		return arr.reduce((acc, current) => {
+			acc.push(callback(current));
+			return acc;
+		}, []);
+	},
+	out2(arr) {
+		return arr.reduce((acc, current) => acc + current, 0);
+	}
+};
+// Casos de prueba:
+console.log(shape.out1([1, 2, 3], x => x * 2)); // [2, 4, 6]
+console.log(shape.out2([1, 2, 3, 4, 5])); // 15
+        </textarea>
+		<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
+        <button id="run-button">Run</button>
+    </div>
+    <div id="app-container">
+        <div id="app">
+		    <h5>Ejercicio 8: Custom Map</h5>
+            <p>Modifica la función para imprimir los valores esperados</p> 
+            <div id="modify-message"></div>
+			<button id="send-response-button">Enviar respuesta</button>
+        </div>
+    </div>
+    <div id="console-container"><div id="console"></div></div>
+    <div id="mocha-container"><div id="mocha"></div></div>
+    <script>mocha.setup('bdd');</script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="errorMessageModal" tabindex="-1" role="dialog" aria-labelledby="errorMessageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorMessageModalLabel">Error Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="errorMessageModalBody">
+                    <!-- Contenido del mensaje de error -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Initialize CodeMirror -->
+    <script>
+	const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+		lineNumbers: true,
+		mode: 'javascript',
+		lineWrapping: true,
+		scrollbarStyle: 'null'
+	});
+
+	var modal_click_message = "Error, haz click para entender el concepto y modifica la función para imprimir los valores esperados";
+	var error_message = `El factorial de un número entero no negativo 𝑛 (denotado como 𝑛!) es el producto de todos los enteros positivos menores o iguales a 
+				𝑛. Por ejemplo, 5!=5×4×3×2×1=120. El factorial de 0 está definido como 1 (0!=1).
+				La función customMap toma un array y una función de callback, aplicando la función a cada elemento del array. 
+			Luego, acumula los resultados en un nuevo array. Esta función imita el comportamiento del método Array.prototype.map de JavaScript.`;
+	var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola";
+
+	function logToConsole(message, color) {
+		const consoleElement = document.getElementById('console');
+		const messageElement = document.createElement('div');
+		messageElement.textContent = message;
+		if (color) {
+			messageElement.style.color = color;
+			messageElement.style.fontWeight = 'bold';
+		}
+		consoleElement.appendChild(messageElement);
+	}
+
+	document.getElementById('run-button').addEventListener('click', function() {
+		// Clear previous results
+		document.getElementById('console').innerHTML = '';
+		document.getElementById('mocha').innerHTML = '';
+		mocha.suite.suites = []; // Clear previous test cases
+
+		// Get the user's code from the editor
+		const userCode = editor.getValue();
+
+		// Redirect console.log to custom console
+		const output = [];
+		const originalConsoleLog = console.log;
+		console.log = function(message) {
+			output.push(message);
+			logToConsole(message);
+		};
+
+		// Show "Ejecutando tests..." message and delay tests
+		logToConsole('Ejecutando tests...', 'blue');
+
+		setTimeout(() => {
+
+		// Evaluate the user's code and capture output
+		try {
+			new Function(userCode)();
+		} catch (e) {
+			console.error('Error evaluating user code:', e);
+			logToConsole('Error: ' + e.message, 'red');
+		} finally {
+			// Restore original console.log
+			console.log = originalConsoleLog;
+		}
+
+		// Define test cases
+		const expect = chai.expect;
+		describe('JavaScript Code Tests', function() {
+			it('should execute without errors', function(done) {
+				try {
+					new Function(userCode)();
+					done();
+				} catch (e) {
+					done(e);
+				}
+			});
+
+			describe('Custom Map', function() {
+				it('should log correct values', function(done) {
+				const output = [];
+				const originalConsoleLog = console.log;
+				console.log = function(message) {
+					output.push(message);
+					originalConsoleLog.apply(console, arguments);
+				};
+
+				// Ensure output is clear before each run
+				output.length = 0;
+
+				// Execute user code
+				new Function(userCode)();
+
+				// Allow time for setTimeouts to complete
+				setTimeout(() => {
+					try {
+						expect(output[0]).to.deep.equal([2, 4, 6]); // Check for the correct output for out1
+						expect(output[1]).to.equal(15); // Check for the correct output for out2
+						done();
+					} catch (err) {
+						done(err);
+					} finally {
+						console.log = originalConsoleLog; // Restore original console.log
+					}
+				}, 100); // Increase timeout if necessary
+			});
+			});
+
+			it('should identify falsy values', function() {
+				expect(false).to.not.be.ok;
+				expect(0).to.not.be.ok;
+				expect('').to.not.be.ok;
+				expect(null).to.not.be.ok;
+				expect(undefined).to.not.be.ok;
+				expect(NaN).to.not.be.ok;
+			});
+
+			it('should define variables correctly', function() {
+				let testVar = 123;
+				expect(testVar).to.equal(123);
+			});
+
+			it('should define and call functions correctly', function() {
+				function testFunction() {
+					return 'Hello, World!';
+				}
+				expect(testFunction()).to.equal('Hello, World!');
+			});
+		});
+
+		// Run Mocha tests
+		mocha.run()
+			.on('test', function(test) {
+				logToConsole('• Running test: ' + test.title);
+			})
+			.on('test end', function(test) {
+				logToConsole('• Test finished: ' + test.title);
+			})
+			.on('pass', function(test) {
+				logToConsole('• Test passed: ' + test.title);
+			})
+			.on('fail', function(test, err) {
+				logToConsole('• Test failed: ' + test.title + ' - ' + err.message);
+				success_message = modal_click_message;
+				const runButton = document.getElementById('run-button');
+				runButton.innerText = 'Reintentar';
+				runButton.style.backgroundColor = '#ff0000ad';
+				runButton.onclick = function() {
+					window.location.reload();
+				};
+				// Función para mostrar el modal con el mensaje de error
+				document.getElementById('modify-message').addEventListener('click', function() {
+					$('#errorMessageModalBody').html(error_message); // Coloca el contenido del error en el cuerpo del modal
+					$('#errorMessageModal').modal('show'); // Muestra el modal
+				});
+			})
+			.on('end', function() {
+				logToConsole('• All tests finished!');
+				document.getElementById('modify-message').innerText = success_message;
+				document.getElementById('modify-message').style.display = 'block';
+				document.getElementById('modify-message').style.color = 'black';
+				if (success_message === "Ok! haz modificado la función para mostrar correctamente los mensajes en consola") {
+					document.getElementById('send-response-button').style.display = 'inline-block';
+					document.getElementById('send-response-button').style.background = 'green';
+					document.getElementById('send-response-button').style.cursor= 'pointer';
+					document.getElementById('send-response-button').style.color= 'white';
+				}
+			});
+			
+			}, 3000); // 3 seconds delay
+	});
+</script>
+</body>
+</html>
