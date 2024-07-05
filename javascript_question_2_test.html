@@ -271,6 +271,11 @@ console.log(shape.out1());
 	    const formData = JSON.parse(localStorage.getItem("formData"));
 	    const email = formData ? formData.Email : null;
             const recipeId = localStorage.getItem('recipeId'); // Recuperar recipeId de local storage
+	     // Crear el objeto que se guardará en la base de datos
+	    const recipeCalificadaOk = {
+	        recipeId: recipeId,
+	        date: new Date().toISOString()
+	    };
 	    try {
 	        const response = await fetch('https://www.refactorii.com/updateOneGoogleSigninUserRecipe', {
 	            method: 'POST',
