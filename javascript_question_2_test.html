@@ -281,6 +281,8 @@ console.log(shape.out1());
 	        });
 	        const data = await response.json();
 	        console.log('Server responds:', "Ok");
+		// Redirección a la página original
+                window.location.href = `https://www.refactorii.com/recipes/${recipeId}`;
 	    } catch (error) {
 	        console.error('Error sending the results to the server:', error);
 	    }
