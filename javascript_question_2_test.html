@@ -22,6 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/3.1.2/jwt-decode.min.js"></script>
 </head>
 <body>
     <div id="editor-container">
@@ -81,21 +82,29 @@ console.log(shape.out1());
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     if (token) {
-	   // Realiza una solicitud al servicio externo para validar el token
-	   fetch(`https://www.refactorii.com/validate-token?token=${token}`)
-	   .then(response => response.json())
-	   .then(data => {
-	      if (data.valid) { console.log(data.valid)
-		 test_cases_scenario()    
-	      } else { console.log(data.valid)
-		 document.body.innerHTML = 'Access denied. Invalid token.';
-	      }
-	   }).catch(error => {
-	      document.body.innerHTML = 'Error validating token.';
-	      console.error('Error:', error);
-       });
+	    // Realiza una solicitud al servicio externo para validar el token
+	    fetch(`https://www.refactorii.com/validate-token?token=${token}`)
+	    .then(response => response.json())
+	    .then(data => {
+	        if (data.valid) {
+	            console.log(data.valid);
+	            // Decodifica el token para obtener el payload
+	            const decodedToken = jwt_decode(token);
+	            const recipeId = decodedToken.recipeId;
+	            console.log('Recipe ID:', recipeId);
+	
+	            // Llama a la función de prueba
+	            test_cases_scenario();
+	        } else {
+	            console.log(data.valid);
+	            document.body.innerHTML = 'Access denied. Invalid token.';
+	        }
+	    }).catch(error => {
+	        document.body.innerHTML = 'Error validating token.';
+	        console.error('Error:', error);
+	    });
     } else {
-       document.body.innerHTML = 'Access denied. No token provided.';
+	    document.body.innerHTML = 'Access denied. No token provided.';
     }
     function test_cases_scenario(){	
 	
@@ -243,6 +252,7 @@ console.log(shape.out1());
 					document.getElementById('send-response-button').style.background = 'green';
 					document.getElementById('send-response-button').style.cursor= 'pointer';
 					document.getElementById('send-response-button').style.color= 'white';
+					guardarResultados(recipeId)
 				}
 			});
 			
@@ -256,6 +266,23 @@ console.log(shape.out1());
 			
 			}, 3000); // 3 seconds delay
 	});
+    }
+    async function guardarResultados(recipeId) {
+	    const formData = JSON.parse(localStorage.getItem("formData"));
+	    const email = formData ? formData.Email : null;
+	    try {
+	        const response = await fetch('https://www.refactorii.com/updateOneGoogleSigninUserRecipe', {
+	            method: 'POST',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: JSON.stringify({ Email: email, recipeCalificadaOk: recipeId })
+	        });
+	        const data = await response.json();
+	        console.log('Server responds:', "Ok");
+	    } catch (error) {
+	        console.error('Error sending the results to the server:', error);
+	    }
     }
 </script>
 </body>
