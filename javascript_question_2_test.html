@@ -50,7 +50,7 @@ console.log(shape.out1());
 		    <h5>Ejercicio 2</h5>
             <p>Modifica la función para mostrar en consola <strong>0,1,2</strong></p>
             <div id="modify-message"></div>
-			<button id="send-response-button">Enviar respuesta</button>
+			<button id="send-response-button" onClick= "guardarResultados()">Enviar respuesta</button>
         </div>
     </div>
     <div id="console-container"><div id="console"></div></div>
@@ -251,7 +251,6 @@ console.log(shape.out1());
 					document.getElementById('send-response-button').style.background = 'green';
 					document.getElementById('send-response-button').style.cursor= 'pointer';
 					document.getElementById('send-response-button').style.color= 'white';
-					guardarResultados(recipeId)
 				}
 			});
 			
@@ -266,7 +265,7 @@ console.log(shape.out1());
 			}, 3000); // 3 seconds delay
 	});
     }
-    async function guardarResultados(recipeId) {
+    async function guardarResultados() {
 	    const formData = JSON.parse(localStorage.getItem("formData"));
 	    const email = formData ? formData.Email : null;
 	    try {
