@@ -90,9 +90,8 @@ console.log(shape.out1());
 	            console.log(data.valid);
 	            // Decodifica el token para obtener el payload
 	            const decodedToken = jwt_decode(token);
-	            const recipeId = decodedToken.recipeId;
+	            recipeId = decodedToken.recipeId;
 	            console.log('Recipe ID:', recipeId);
-	
 	            // Llama a la función de prueba
 	            test_cases_scenario();
 	        } else {
