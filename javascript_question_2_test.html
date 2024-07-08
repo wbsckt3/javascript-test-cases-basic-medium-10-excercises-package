@@ -280,8 +280,6 @@ console.log(shape.out1());
 	    url.searchParams.delete('token');
 	    // Obtener el pathname sin el token
             const urlWithoutToken = url.pathname.split('/').pop();
-	    // Obtener la URL sin el token
-	    urlWithoutToken = url.toString();
 	    const recipeCalificadaOk = {
 	        recipeId: recipeId,
 		url: urlWithoutToken,
