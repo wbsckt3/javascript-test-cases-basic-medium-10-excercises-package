@@ -272,8 +272,17 @@ console.log(shape.out1());
 	    const email = formData ? formData.Email : null;
             const recipeId = localStorage.getItem('recipeId'); // Recuperar recipeId de local storage
 	     // Crear el objeto que se guardará en la base de datos
+	     // Obtener la URL actual
+		const currentUrl = window.location.href;
+		// Crear un objeto URL
+		const url = new URL(currentUrl);
+		// Eliminar el parámetro 'token' de la query string
+		url.searchParams.delete('token');
+		// Obtener la URL sin el token
+		const urlWithoutToken = url.toString();
 	    const recipeCalificadaOk = {
-	        recipeId: recipeId,
+	        //recipeId: recipeId,
+		url: urlWithoutToken,
 	        date: new Date().toISOString()
 	    };
 	    try {
@@ -282,7 +291,8 @@ console.log(shape.out1());
 	            headers: {
 	                'Content-Type': 'application/json'
 	            },
-	            body: JSON.stringify({ Email: email, recipeCalificadaOk: recipeId })
+	            //body: JSON.stringify({ Email: email, recipeCalificadaOk: recipeId })
+		    body: JSON.stringify({ Email: email, recipeId: recipeId, recipeCalificadaOk })	
 	        });
 	        const data = await response.json();
 	        console.log('Server responds:', "Ok");
