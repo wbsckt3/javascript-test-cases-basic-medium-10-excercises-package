@@ -271,15 +271,17 @@ console.log(shape.out1());
 	    const formData = JSON.parse(localStorage.getItem("formData"));
 	    const email = formData ? formData.Email : null;
             const recipeId = localStorage.getItem('recipeId'); // Recuperar recipeId de local storage
-	     // Crear el objeto que se guardará en la base de datos
-	     // Obtener la URL actual
-		const currentUrl = window.location.href;
-		// Crear un objeto URL
-		const url = new URL(currentUrl);
-		// Eliminar el parámetro 'token' de la query string
-		url.searchParams.delete('token');
-		// Obtener la URL sin el token
-		const urlWithoutToken = url.toString();
+	    // Crear el objeto que se guardará en la base de datos
+	    // Obtener la URL actual
+	    const currentUrl = window.location.href;
+	    // Crear un objeto URL
+	    const url = new URL(currentUrl);
+	    // Eliminar el parámetro 'token' de la query string
+	    url.searchParams.delete('token');
+	    // Obtener el pathname sin el token
+            const urlWithoutToken = url.pathname.split('/').pop();
+	    // Obtener la URL sin el token
+	    const urlWithoutToken = url.toString();
 	    const recipeCalificadaOk = {
 	        recipeId: recipeId,
 		url: urlWithoutToken,
