@@ -281,7 +281,7 @@ console.log(shape.out1());
 		// Obtener la URL sin el token
 		const urlWithoutToken = url.toString();
 	    const recipeCalificadaOk = {
-	        //recipeId: recipeId,
+	        recipeId: recipeId,
 		url: urlWithoutToken,
 	        date: new Date().toISOString()
 	    };
@@ -292,7 +292,7 @@ console.log(shape.out1());
 	                'Content-Type': 'application/json'
 	            },
 	            //body: JSON.stringify({ Email: email, recipeCalificadaOk: recipeId })
-		    body: JSON.stringify({ Email: email, recipeId: recipeId, recipeCalificadaOk })	
+		    body: JSON.stringify({ Email: email, recipeCalificadaOk })	
 	        });
 	        const data = await response.json();
 	        console.log('Server responds:', "Ok");
