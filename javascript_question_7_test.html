@@ -27,8 +27,7 @@
         <textarea id="code-editor">
 const shape = {
 	out1(celsius) {
-		let fahrenheit = celsius * (9 / 5) + 32;
-		return fahrenheit;
+		let fahrenheit = var * (9 / 5) + 32;
 	},
 	out2(celsius) {
 		return this.out1(celsius);
@@ -45,7 +44,7 @@ console.log(shape.out2(100));
     <div id="app-container">
         <div id="app">
 		    <h5>Ejercicio 7: Convertir Celsius a Fahrenheit</h5>
-            <p>Completa el código para definir una función que convierta grados celsius a grados fahrenheit</p> 
+            <p>Corrige la función out1 para que convierta grados celsius a grados fahrenheit</p> 
             <div id="modify-message"></div>
 	    <button id="send-response-button" onClick= "guardarResultados()">Enviar respuesta</button>
         </div>
