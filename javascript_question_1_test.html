@@ -16,12 +16,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Bootstrap JS y dependencias -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/cjs/index.min.js"></script>
 </head>
 <body>
     <div id="editor-container">
@@ -48,7 +46,7 @@ console.log(shape.out2());
 		    <h5>Ejercicio 1</h5>
             <p>modifica la función para impimir en consola: <strong>Refactorii, 21</strong></p>
             <div id="modify-message"></div>
-			<button id="send-response-button">Enviar respuesta</button>
+	    <button id="send-response-button" onClick= "guardarResultados()">Enviar respuesta</button>
         </div>
     </div>
     <div id="console-container"><div id="console"></div></div>
