@@ -26,10 +26,10 @@
         <textarea id="code-editor">
 const shape = {
   out1() {
-	return this.name;
+	this.name;
   },
   out2() {
-	return this.age;
+	this.age;
   },
   name: 'Refactorii',
   age: 21,
@@ -44,7 +44,7 @@ console.log(shape.out2());
     <div id="app-container">
         <div id="app">
 		    <h5>Ejercicio 1</h5>
-            <p>modifica la función para impimir en consola: <strong>Refactorii, 21</strong></p>
+            <p>Corrige la sintaxis de las funciones para impimir en consola: <strong>Refactorii, 21</strong></p>
             <div id="modify-message"></div>
 	    <button id="send-response-button" onClick= "guardarResultados()">Enviar respuesta</button>
         </div>
