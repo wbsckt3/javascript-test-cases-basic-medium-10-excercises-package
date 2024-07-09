@@ -28,9 +28,9 @@
 shape = {
   radius: 10,
   diameter() {
-	return this.radius * 2;
+	return radius * 2;
   },
-  perimeter(){ return 2 * Math.PI * this.radius }
+  perimeter=> () 2 * Math.PI * this.radius
 };
 // Casos de prueba:
 console.log(shape.diameter());
