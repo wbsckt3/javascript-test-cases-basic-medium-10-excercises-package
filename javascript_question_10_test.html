@@ -28,18 +28,18 @@
 const shape = {
   out1() {
 	// null
-	let a = null;
+	let a = ?; // que valor debe asignarse aqui para que imprima null en consola?
 	return `Valor de a: ${a}`;
   },
   out2() {
 	// undefined
-	let b;
+	let b = 4; // que valor debe tener b para que imprima undefined en consola?
 	return `Valor de b: ${b}`;
   },
   out3() {
 	// 0
 	let c = 0;
-	if (!c) {
+	if (c) { // Define aqui c como falso
 	  return 'c es falsy'; 
 	}
   },
