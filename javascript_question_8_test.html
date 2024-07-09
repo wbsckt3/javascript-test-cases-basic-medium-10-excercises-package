@@ -29,11 +29,11 @@ const shape = {
 	out1(arr, callback) {
 		return arr.reduce((acc, current) => {
 			acc.push(callback(current));
-			return acc;
+			return current;
 		}, []);
 	},
 	out2(arr) {
-		return arr.reduce((acc, current) => acc + current, 0);
+		return arr.reduce((acc, 1) => acc + callback, 0);
 	}
 };
 // Casos de prueba:
@@ -46,7 +46,7 @@ console.log(shape.out2([1, 2, 3, 4, 5])); // 15
     <div id="app-container">
         <div id="app">
 		    <h5>Ejercicio 8: Custom Map</h5>
-            <p>Modifica la función para imprimir los valores esperados</p> 
+            <p>Corrige la función para imprimir los valores esperados</p> 
             <div id="modify-message"></div>
 	    <button id="send-response-button" onClick= "guardarResultados()">Enviar respuesta</button>
         </div>
