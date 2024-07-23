@@ -36,7 +36,7 @@ const shape = {
 		return arr.reduce((acc, 1) => acc + callback, 0);
 	}
 };
-// Casos de prueba:
+// Tests Cases:
 console.log(shape.out1([1, 2, 3], x => x * 2)); // [2, 4, 6]
 console.log(shape.out2([1, 2, 3, 4, 5])); // 15
         </textarea>
@@ -45,8 +45,8 @@ console.log(shape.out2([1, 2, 3, 4, 5])); // 15
     </div>
     <div id="app-container">
         <div id="app">
-	    <h5>Ejercicio 8: Custom Map</h5>
-            <p id="modify-message">Corrige la función para imprimir los valores esperados</p> 
+	    <h5>Excercise 8: Reduce function</h5>
+            <p id="modify-message">Fix function to print expected values</p> 
 	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
         </div>
     </div>
@@ -112,12 +112,11 @@ console.log(shape.out2([1, 2, 3, 4, 5])); // 15
 		scrollbarStyle: 'null'
 	});
 
-	var modal_click_message = "Error, haz click para entender el concepto y modifica la función para imprimir los valores esperados";
-	var error_message = `El factorial de un número entero no negativo 𝑛 (denotado como 𝑛!) es el producto de todos los enteros positivos menores o iguales a 
-				𝑛. Por ejemplo, 5!=5×4×3×2×1=120. El factorial de 0 está definido como 1 (0!=1).
-				La función customMap toma un array y una función de callback, aplicando la función a cada elemento del array. 
-			Luego, acumula los resultados en un nuevo array. Esta función imita el comportamiento del método Array.prototype.map de JavaScript.`;
-	var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola";
+	var modal_click_message = "The reduce function in JavaScript is a powerful array method that allows";
+	var error_message = `The reduce function in JavaScript is a powerful array method that allows you to accumulate or reduce the elements 
+            of an array into a single value. This value can be of any type, including numbers, objects, or even other arrays. The reduce function 
+	    executes a provided callback function for each element of the array (from left to right) and accumulates the result.`;
+	var success_message = "Ok! very good";
 
 	function logToConsole(message, color) {
 		const consoleElement = document.getElementById('console');
