@@ -45,10 +45,9 @@ console.log(shape.out1());
     </div>
     <div id="app-container">
         <div id="app">
-		    <h5>Ejercicio 2</h5>
-            <p>Modifica la función para mostrar en consola <strong>0,1,2</strong></p>
-            <div id="modify-message"></div>
-			<button id="send-response-button" onClick= "guardarResultados()">Enviar respuesta</button>
+	    <h5>Ejercicio 2</h5>
+            <p id="modify-message">Modifica la función para mostrar en consola <strong>0,1,2</strong></p>
+	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
         </div>
     </div>
     <div id="console-container"><div id="console"></div></div>
@@ -143,13 +142,12 @@ console.log(shape.out1());
 		// Redirect console.log to custom console
 		const output = [];
 		const originalConsoleLog = console.log;
-		console.log = function(message) {
-			output.push(message);
-			logToConsole(message);
+		logToConsole('Running tests....', '#67e810');
+		console.log = function(...args) {
+		   const message = args.join(' ');
+		   originalConsoleLog.apply(console, args); // Still log to the original console
+		   logToConsole(message);
 		};
-		
-		// Show "Ejecutando tests..." message and delay tests
-		logToConsole('Ejecutando tests...', 'blue');
 
 		setTimeout(() => {
 
@@ -215,6 +213,8 @@ console.log(shape.out1());
 			});
 		});
 
+		// Variable para rastrear el estado de los tests
+		let allTestsPassed = true;
 		// Run Mocha tests
 		mocha.run()
 			.on('test', function(test) {
@@ -240,18 +240,17 @@ console.log(shape.out1());
 					$('#errorMessageModalBody').html(error_message); // Coloca el contenido del error en el cuerpo del modal
 					$('#errorMessageModal').modal('show'); // Muestra el modal
 				});
+				allTestsPassed = false; // Si cualquier test falla, actualizamos la variable
 			})
 			.on('end', function() {
 				logToConsole('• All tests finished!');
 				document.getElementById('modify-message').innerText = success_message;
 				document.getElementById('modify-message').style.display = 'block';
 				document.getElementById('modify-message').style.color = 'black';
-				if (success_message === "Ok! haz modificado la función para mostrar correctamente los mensajes en consola") {
-					document.getElementById('send-response-button').style.display = 'inline-block';
-					document.getElementById('send-response-button').style.background = 'green';
-					document.getElementById('send-response-button').style.cursor= 'pointer';
-					document.getElementById('send-response-button').style.color= 'white';
-				}
+				if (allTestsPassed) {
+				   const sendResponseButton = document.getElementById('send-response-button');
+				   sendResponseButton.classList.add('enabled');
+				} 
 			});
 			
 			} catch (e) {
