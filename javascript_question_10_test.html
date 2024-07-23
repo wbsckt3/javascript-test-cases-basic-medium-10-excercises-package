@@ -28,26 +28,26 @@
 const shape = {
   out1() {
 	// null
-	let a = ?; // que valor debe asignarse aqui para que imprima null en consola?
-	return `Valor de a: ${a}`;
+	let a = ?; // What value should be assigned here so that it prints null in the console?
+	return `a value: ${a}`;
   },
   out2() {
 	// undefined
-	let b = 4; // que valor debe tener b para que imprima undefined en consola?
-	return `Valor de b: ${b}`;
+	let b = 4; // What value should b have for it to print undefined in the console?
+	return `b value: ${b}`;
   },
   out3() {
 	// 0
 	let c = 0;
-	if (c) { // Define aqui c como falso
-	  return 'c es falsy'; 
+	if (c) { // Define c here as false
+	  return 'c is falsy'; 
 	}
   },
   out4() {
 	// false
 	let d = false;
 	if (!d) {
-	  return 'd es falsy';
+	  return 'd is falsy';
 	}
   },
   out5() {
@@ -58,20 +58,20 @@ const shape = {
 	return [output1, output2];
   }
 };
-// Casos de prueba:
-console.log(shape.out1()); // espera null
-console.log(shape.out2()); // espera undefined
-console.log(shape.out3()); // espera c es falsy
-console.log(shape.out4()); // espera d es falsy
-console.log(shape.out5()); // espera NaN
+// Tests cases:
+console.log(shape.out1()); // expected null
+console.log(shape.out2()); // expected undefined
+console.log(shape.out3()); // expected c es falsy
+console.log(shape.out4()); // expected d es falsy
+console.log(shape.out5()); // expected NaN
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
     </div>
     <div id="app-container">
         <div id="app">
-	    <h5>Ejercicio 10: Falsy Values (NaN, null, undefined, false)</h5>
-            <p id="modify-message">Completa las funciones para generar por consola los falsy values esperados en los casos de prueba planteados</p> 
+	    <h5>Exercise 10: Falsy Values (NaN, null, undefined, false)</h5>
+            <p id="modify-message">Complete the functions to generate the expected false values ​​in the proposed test cases through the console.</p> 
 	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
         </div>
     </div>
@@ -137,11 +137,11 @@ console.log(shape.out5()); // espera NaN
 		scrollbarStyle: 'null'
 	});
 
-	var modal_click_message = "Error, haz click para entender el concepto y modifica la función para generar los casos de prueba planteados";
-	var error_message = `En JavaScript, los "falsy values" son aquellos valores que, cuando se evalúan en un contexto booleano, se consideran false. 
-	Estos son: false, 0 (el número cero), -0 (el número cero negativo), 0n (el BigInt cero), "" o '' (una cadena de texto vacía), 
-	null, undefined, NaN (Not-a-Number).  Cualquier otro valor se considera "truthy" y se evalúa como true en un contexto booleano.`;
-	var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola";
+	var modal_click_message = `In JavaScript, "falsy values" are those values ​​that, when evaluated in...`;
+	var error_message = `In JavaScript, "falsy values" are those values ​​that, when evaluated in a Boolean context, are considered false. 
+	These are: false, 0 (the number zero), -0 (the negative number zero), 0n (the BigInt zero), "" or '' (an empty text string), 
+	null, undefined, NaN (Not-a-Number).  Any other value is considered "truthy" and evaluates to true in a boolean context.`;
+	var success_message = "Ok! Good work";
 
 	function logToConsole(message, color) {
 		const consoleElement = document.getElementById('console');
