@@ -25,32 +25,31 @@
 <body>
     <div id="editor-container">
         <textarea id="code-editor">
-// Input de la función = array y una función flecha callback
+// Function inputs: an array and a callback arrow function
 const shape = {
   out1(callback) {
 	return arr.reduce((acc, current) => {
-             // Aquí retorna un nuevo arreglo con el valor transformado
+             // Here it returns a new array with the transformed value
 	}, []);
   }
 };
-// Casos de prueba:
-// Debería duplicar cada elemento en el arreglo 
-console.log(shape.out1([1, 2, 3], x => x * 2)); // Debería imprimir [2, 4, 6]
-// Debería mapear un arreglo de strings a sus longitudes
-console.log(shape.out1(['apple', 'banana', 'orange'], x => x.length)); // Debería imprimir [5, 6, 6]
-// Debería mapear un arreglo de objetos a un arreglo de valores de propiedad específicos
+// Tests cases:
+// Should duplicate each element in the array 
+console.log(shape.out1([1, 2, 3], x => x * 2)); // Should print [2, 4, 6]
+// Should map an array of strings to their lengths
+console.log(shape.out1(['apple', 'banana', 'orange'], x => x.length)); //  Should print [5, 6, 6]
+// Should map an array of objects to an array of specific property values
 console.log(shape.out1(
    [{ name: 'John', age: 30 }, { name: 'Jane', age: 25 }, { name: 'Doe', age: 40 }], x => x.age
-)); // Debería imprimir [30, 25, 40]
+)); // Should print [30, 25, 40]
         </textarea>
-		<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
+	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
     </div>
     <div id="app-container">
         <div id="app">
-	    <h5>Ejercicio 9: Custom Map 2</h5>
-            <p id="modify-message">La función customMap toma un array y una función de callback, aplicando la función a cada elemento del array. 
-			Luego, acumula los resultados en un nuevo array. Esta función imita el comportamiento del método Array.prototype.map de JavaScript.</p> 
+	    <h5>Exercise 9: Array Transformation Using reduce and Callback Functions </h5>
+            <p id="modify-message">This exercise focuses on the concept of array transformation using the reduce method in combination with callback functions in JavaScript</p> 
 	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
         </div>
     </div>
@@ -117,8 +116,27 @@ console.log(shape.out1(
 	});
 
 	var modal_click_message = "Error, haz click para entender el concepto y modifica la función para imprimir los valores esperados";
-	var error_message = `El factorial de un número entero no negativo 𝑛 (denotado como 𝑛!) es el producto de todos los enteros positivos menores o iguales a 
-				𝑛. Por ejemplo, 5!=5×4×3×2×1=120. El factorial de 0 está definido como 1 (0!=1).`;
+	var error_message = `**Function Definition:**
+
+- 'shape' is an object with a method 'out1'.
+- The 'out1' method takes an array ('arr') and a callback function ('callback') as inputs.
+
+**Using 'reduce':**
+
+- Inside the 'out1' method, the 'reduce' function is used to iterate over the array and transform its elements based on the callback function.
+- 'reduce' takes two arguments: a reducer function and an initial value (an empty array '[]' in this case).
+
+**Callback Function:**
+
+- The callback function is applied to each element of the array to produce a new transformed value.
+- The transformed values are accumulated into a new array.
+
+**Test Cases:**
+
+- **Duplicating Elements**: Each element in the array '[1, 2, 3]' is doubled, resulting in '[2, 4, 6]'.
+- **Mapping Strings to Lengths**: Each string in the array '['apple', 'banana', 'orange']' is mapped to its length, resulting in '[5, 6, 6]'.
+- **Mapping Objects to Property Values**: Each object in the array is mapped to its 'age' property, resulting in '[30, 25, 40]'.
+`;
 	var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola";
 
 	function logToConsole(message, color) {
