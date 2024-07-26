@@ -109,9 +109,15 @@ console.log(shape.out2());
             scrollbarStyle: 'null'
         });
         
-        var modal_click_message = `Error, Haz click para entender el concepto, completa el código para imprimir correctamente los valores esperados`;
-        var error_message = `Error: AssertionError: expected undefined to equal 'Refactorii' Analiza las funciónes de salida out(). Tip: Falta algo en la sintaxis de la función`;       
-		var success_message = `Ok! haz modificado la función para mostrar correctamente los mensajes en consola`
+        var modal_click_message = `In JavaScript, objects can have methods that access the properties of the same object...`;
+        var error_message = `In JavaScript, objects can have methods that access the properties of the same object using the this keyword. However, 
+	if the methods are not properly defined, they may not return any value or interact with the properties as intended.
+        In the given example, shape is an object with properties name and age, and methods out1 and out2. Currently, these methods only access the 
+	properties without returning any value, which makes them incomplete.
+	To refactor this code, we should modify the methods out1 and out2 to return the values of name and age, respectively. This will allow us to 
+        retrieve and use these values when calling the methods.`;       
+	var success_message = `🎉 Congratulations! You've successfully completed the challenge! Your determination and skill have paid off. 
+        Keep up the great work and continue pushing your boundaries. Onward to new challenges! 🚀`
         
         // Función para mostrar el modal con el mensaje de error
         document.getElementById('modify-message').addEventListener('click', function() {
