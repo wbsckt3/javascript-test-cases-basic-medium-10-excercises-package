@@ -169,23 +169,22 @@ console.log(shape.out1());
 			});
 
   it('should log correct values', function(done) {
-    // Create an array to capture console.log outputs
-    let loggedValues = [];
-    const originalConsoleLog = console.log;
+     const output = [];
+     const originalConsoleLog = console.log;
+     console.log = function(message) {
+        output.push(message);
+        originalConsoleLog.apply(console, arguments);
+     };
 
-    // Override console.log to capture output
-    console.log = function(value) {
-      loggedValues.push(value);
-    };
+  output.length = 0;
 
-    // Run the function
-    shape.out1();
+  new Function(userCode)();
 
     // Allow time for the setTimeouts to complete
     setTimeout(() => {
       try {
         // Check the captured values
-        expect(loggedValues).to.eql([0, 1, 2]); // Ensure the logged values are correct
+        expect(output).to.eql([0, 1, 2]); // Ensure the logged values are correct
         done();
       } catch (err) {
         done(err);
