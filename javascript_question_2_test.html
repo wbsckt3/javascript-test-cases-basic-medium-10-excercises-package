@@ -168,28 +168,35 @@ console.log(shape.out1());
 				}
 			});
 
-			describe('shape.out1()', function() {
-			  it('should log correct values', function(done) {
-				// Ejecuta la función out1
-		
-				// Permite tiempo para que los setTimeouts se completen
-				setTimeout(() => {
-				  try {
-					expect(output[0]).to.eql([0, 1, 2]); // Verifica la salida correcta
-					done();
-				  } catch (err) {
-					done(err);
-				  }
-				}, 100); // Aumenta el tiempo de espera si es necesario
-			  });
-			});
+describe('shape.out1()', function() {
+  it('should log correct values', function(done) {
+    // Create an array to capture console.log outputs
+    let loggedValues = [];
+    const originalConsoleLog = console.log;
 
-			/*it('should use let instead of var', function() {
-				const letUsed = /let\s+i\s*=/.test(userCode);
-				const varUsed = /var\s+i\s*=/.test(userCode);
-				expect(letUsed).to.be.true;
-				expect(varUsed).to.be.false;
-			});*/
+    // Override console.log to capture output
+    console.log = function(value) {
+      loggedValues.push(value);
+    };
+
+    // Run the function
+    shape.out1();
+
+    // Allow time for the setTimeouts to complete
+    setTimeout(() => {
+      try {
+        // Check the captured values
+        expect(loggedValues).to.eql([0, 1, 2]); // Ensure the logged values are correct
+        done();
+      } catch (err) {
+        done(err);
+      } finally {
+        // Restore the original console.log
+        console.log = originalConsoleLog;
+      }
+    }, 100); // Increase delay if necessary
+  });
+});
 
 			it('should identify falsy values', function() {
 				expect(false).to.not.be.ok;
