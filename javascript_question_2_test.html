@@ -27,18 +27,16 @@
         <textarea id="code-editor">
 const shape = {
   out1() {
-	let output = [];
-	for (var i = 0; i < 3; i++) {
-	  setTimeout(() => {
-		console.log(i);
-		output.push(0);
-	  }, 1);
-	}
-	return output;
+    let output = [];
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        console.log(i, i * i); // Log index and its square
+        output.push([i, i * i]); // Capture logged values
+      }, 100); // Set delay to allow time for the logs to appear
+    }
+    return output; // Return immediately; not capturing async logs here
   },
 };
-// Casos de prueba:
-console.log(shape.out1());
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
@@ -168,35 +166,41 @@ console.log(shape.out1());
 				}
 			});
 
- it('should log correct values', function(done) {
-  const output = [];
-  const originalConsoleLog = console.log;
+ describe('shape.out1()', function() {
+  it('should log correct values', function(done) {
+    const loggedValues = [];
+    const originalConsoleLog = console.log;
 
-  // Override console.log to capture the output
-  console.log = function(message) {
-    output.push(message);
-    originalConsoleLog.apply(console, arguments); // Optional: Call the original console.log
-  };
+    // Override console.log to capture the output
+    console.log = function(...args) {
+      loggedValues.push(args); // Capture logged arguments
+      originalConsoleLog.apply(console, args); // Optional: Call original console.log
+    };
 
-  // Clear previous output
-  output.length = 0;
+    // Clear previous logs
+    loggedValues.length = 0;
 
-  // Run the function under test
-  shape.out1();
+    // Run the function
+    shape.out1();
 
-  // Allow time for the setTimeouts to complete
-  setTimeout(() => {
-    try {
-      // Check the captured values
-      expect(output).to.eql([0, 1, 2]); // Ensure the logged values are correct
-      done();
-    } catch (err) {
-      done(err);
-    } finally {
-      // Restore the original console.log
-      console.log = originalConsoleLog;
-    }
-  }, 100); // Increase delay if necessary
+    // Allow time for the setTimeouts to complete
+    setTimeout(() => {
+      try {
+        // Check the captured values
+        expect(loggedValues).to.deep.equal([
+          [0, 0], // Index 0 and its square 0
+          [1, 1], // Index 1 and its square 1
+          [2, 4], // Index 2 and its square 4
+        ]);
+        done();
+      } catch (err) {
+        done(err);
+      } finally {
+        // Restore the original console.log
+        console.log = originalConsoleLog;
+      }
+    }, 200); // Adjust the delay as needed
+  });
 });
 
 
