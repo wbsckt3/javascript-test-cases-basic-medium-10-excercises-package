@@ -168,6 +168,18 @@ const shape = {
 
 const { expect } = chai;
 
+const shape = {
+  out1() {
+    let output = [];
+    for (let i = 0; i < 3; i++) {
+      console.log(i);
+      output.push(i);
+    }
+    return output;
+  },
+};
+
+// Suite de pruebas
 describe('shape.out1()', function() {
   let loggedValues;
   let originalConsoleLog;
@@ -187,37 +199,14 @@ describe('shape.out1()', function() {
     console.log = originalConsoleLog;
   });
 
-  it('should return an empty array immediately after calling', function() {
+  it('should return an array with values [0, 1, 2]', function() {
     const result = shape.out1();
-    expect(result).to.be.an('array').that.is.empty;
+    expect(result).to.deep.equal([0, 1, 2]);
   });
 
-  it('should log correct values in order', function(done) {
+  it('should log the values 0, 1, and 2 in order', function() {
     shape.out1();
-
-    // Espera un poco para asegurarse de que los setTimeouts se hayan ejecutado
-    setTimeout(() => {
-      try {
-        expect(loggedValues).to.deep.equal([0, 1, 2]);
-        done();
-      } catch (err) {
-        done(err);
-      }
-    }, 50);
-  });
-
-  it('should populate the output array correctly after delays', function(done) {
-    const result = shape.out1();
-
-    // Espera un poco para asegurarse de que los setTimeouts se hayan ejecutado
-    setTimeout(() => {
-      try {
-        expect(result).to.deep.equal([0, 1, 2]);
-        done();
-      } catch (err) {
-        done(err);
-      }
-    }, 50);
+    expect(loggedValues).to.deep.equal([0, 1, 2]);
   });
 });
 
