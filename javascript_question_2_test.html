@@ -27,18 +27,16 @@
         <textarea id="code-editor">
 const shape = {
   out1() {
-	let output = [];
-	for (let i = 0; i < 3; i++) {
-	  setTimeout(() => {
-		console.log(i);
-		output.push(i);
-	  }, 1);
-	}
-	return output;
+    let output = [];
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        console.log(i);
+        output.push(i);
+      }, 1);
+    }
+    return output;
   },
 };
-// Casos de prueba:
-console.log(shape.out1());
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
@@ -171,20 +169,22 @@ console.log(shape.out1());
 const { expect } = chai;
 
 describe('shape.out1()', function() {
+  let loggedValues;
+  let originalConsoleLog;
+
   beforeEach(function() {
-    // Limpia la consola antes de cada prueba
-    console.log = this.originalConsoleLog || console.log;
-    this.loggedValues = [];
-    this.originalConsoleLog = console.log;
+    // Almacenar la función original de console.log y los valores registrados
+    loggedValues = [];
+    originalConsoleLog = console.log;
     console.log = (...args) => {
-      this.loggedValues.push(args[0]); // Captura el valor registrado
-      this.originalConsoleLog.apply(console, args); // Llama al original console.log
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
     };
   });
 
   afterEach(function() {
     // Restaura console.log después de cada prueba
-    console.log = this.originalConsoleLog;
+    console.log = originalConsoleLog;
   });
 
   it('should return an empty array immediately after calling', function() {
@@ -198,7 +198,7 @@ describe('shape.out1()', function() {
     // Espera un poco para asegurarse de que los setTimeouts se hayan ejecutado
     setTimeout(() => {
       try {
-        expect(this.loggedValues).to.deep.equal([0, 1, 2]);
+        expect(loggedValues).to.deep.equal([0, 1, 2]);
         done();
       } catch (err) {
         done(err);
