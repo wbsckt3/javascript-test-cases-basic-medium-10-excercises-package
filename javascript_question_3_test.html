@@ -28,11 +28,11 @@
 shape = {
   radius: 10,
   diameter() {
-	return radius * 2;
+	return this.radius * 2;
   },
-  perimeter=> () 2 * Math.PI * this.radius
+  perimeter(){ return 2 * Math.PI * this.radius }
 };
-// Test cases:
+// Test case:
 console.log(shape.diameter());
 console.log(shape.perimeter());
         </textarea>
