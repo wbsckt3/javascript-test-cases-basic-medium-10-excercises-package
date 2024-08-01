@@ -153,8 +153,8 @@ console.log(shape.out1());
 
 		// Evaluate the user's code and capture output
 		try {
-			new Function(userCode)();
-		
+		    const userFunction = new Function(userCode + '; return shape;');  
+                    const shape = userFunction();
 
 		// Define test cases
 		const expect = chai.expect;
