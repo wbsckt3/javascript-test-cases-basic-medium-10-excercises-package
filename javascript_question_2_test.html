@@ -27,14 +27,18 @@
         <textarea id="code-editor">
 const shape = {
   out1() {
-    let output = [];
+    let output = {};
     for (let i = 0; i < 3; i++) {
         console.log(i);
-        output.push(i);
+        output.(i);
     }
     return output;
   },
 };
+// Test Cases:
+// should log the values 0, 1, and 2 in order
+// should return an array with values [0, 1, 2]
+console.log(shape.out1());
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
