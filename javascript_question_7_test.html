@@ -27,13 +27,14 @@
         <textarea id="code-editor">
 const shape = {
 	out1(celsius) {
-		let fahrenheit = var * (9 / 5) + 32;
+		let fahrenheit = celsius * (9 / 5) + 32;
+		return fahrenheit;
 	},
 	out2(celsius) {
 		return this.out1(celsius);
 	}
 };
-// Test Cases:
+// Test Case:
 console.log(shape.out1(0));
 console.log(shape.out2(-40));
 console.log(shape.out2(100));
