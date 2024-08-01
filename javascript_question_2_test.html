@@ -27,16 +27,17 @@
         <textarea id="code-editor">
 const shape = {
   out1() {
-    let output = [];
-    for (let i = 0; i < 3; i++) {
-      setTimeout(() => {
-        console.log(i, i * i); // Log index and its square
-        output.push([i, i * i]); // Capture logged values
-      }, 100); // Set delay to allow time for the logs to appear
-    }
-    return output; // Return immediately; not capturing async logs here
+	let output = [];
+	for (let i = 0; i < 3; i++) {
+	  setTimeout(() => {
+		console.log(i);
+		output.push(i);
+	  }, 1);
+	}
+	return output;
   },
 };
+// Test Case:
 console.log(shape.out1());
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
