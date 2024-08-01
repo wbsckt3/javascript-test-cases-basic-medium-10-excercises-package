@@ -32,7 +32,7 @@ shape = {
   },
   perimeter=> () 2 * Math.PI * this.radius
 };
-// Casos de prueba:
+// Test cases:
 console.log(shape.diameter());
 console.log(shape.perimeter());
         </textarea>
@@ -108,12 +108,13 @@ console.log(shape.perimeter());
         });
         
         var modal_click_message = "Error, Haz click para entender el concepto y modifica la función para imprimir los valores esperados";
-        var error_message = 'Hay que tener en cuenta aqui que el valor de diámetro es una función regular o normal, mientras que el valor de perímetro es una función de flecha.'
-                            +'Con las funciones de flecha, la palabra clave this se refiere a su ámbito actual, a diferencia de las funciones regulares. Esto significa que cuando '
-							+'llamamos "perímetro", no se refiere al objeto en sí mismo, sino a su ámbito circundante (ventana por ejemplo).'
-							+'No hay valor radius en ese objeto, que devuelve undefined.';
-        var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola"
+        var error_message = 'It must be taken into account here that the diameter value is a regular or normal function, while the perimeter value is an arrow function.'
+                            +'With arrow functions, the this keyword refers to their current scope, unlike with regular functions. This means that when '
+							+'we call "perimeter", it does not refer to the object itself, but to its surrounding area (window for example).'
+							+'There is no radius value in that object, which returns undefined.';
 
+
+        var success_message = "Awesome job! 🎉 You've just conquered another JavaScript challenge and leveled up your coding skills. Keep pushing the boundaries and exploring new concepts. The journey of learning never stops, and you're doing great! 🚀💪"
         function logToConsole(message, color) {
             const consoleElement = document.getElementById('console');
             const messageElement = document.createElement('div');
