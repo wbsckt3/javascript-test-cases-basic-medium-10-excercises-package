@@ -27,11 +27,11 @@
         <textarea id="code-editor">
 shape = {
   out1() {
-	return +true;
+	return +true; // Type coercion from boolean to number
   },
   out2() { return "Hello javascript!"; }
 };
-// Casos de prueba:
+// Test cases:
 console.log(shape.out1());
 console.log(shape.out2());
         </textarea>
@@ -40,8 +40,8 @@ console.log(shape.out2());
     </div>
     <div id="app-container">
         <div id="app">
-	    <h5>Exercise 4</h5>
-            <p id="modify-message">Expected in console: <strong>1, Hello javascript!</strong></p>
+	    <h5>Exercise 4: Type Coercion in JavaScript</h5>
+            <p id="modify-message">Refers to the automatic or implicit conversion of values from one data type to another in JavaScript...</p>
 	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
         </div>
     </div>
@@ -107,10 +107,12 @@ console.log(shape.out2());
             scrollbarStyle: 'null'
         });
         
-        var modal_click_message = "Error, Haz click para entender el concepto y modifica la función para imprimir los valores esperados";
-        var error_message = 'En el primera caso se intenta convertir un operando en un número. true es 1, y false es 0.'
-                             +'En el segundo caso la cadena "Lydia" es un valor verdadero. Lo que realmente estamos preguntando es "¿es este verdadero valor falso?". Esto devuelve false.';
-        var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola"
+        var modal_click_message = "";
+        var error_message = `Type Coercion refers to the automatic or implicit conversion of values from one data type to 
+	another in JavaScript. In the provided function, +true is an example of type coercion, where the boolean 
+        value true is converted to the number 1. Similarly, out2 shows that a function can return a string value, 
+	illustrating how different types of values can be handled within JavaScript functions.`;
+        var success_message = "🎉 Fantastic job! You've successfully tackled another JavaScript challenge, mastering type coercion along the way. Keep up the great work! 🚀"
 
         function logToConsole(message, color) {
             const consoleElement = document.getElementById('console');
