@@ -24,17 +24,17 @@
 </head>
 <body>
     <div id="editor-container">
-        <textarea id="code-editor">
+    <textarea id="code-editor">
 const factorial = {
 	de(n) {
-		// Caso base: factorial de 0 es 1
+		// Base Case: factorial of 0 es 1
 		if (n === 0) return 1; 
-		// construye a continuación una llamada recursiva para calcular el factorial de n-1
+		// Now construct a recursive call to calculate the factorial of n-1
 	}
 };
-// Caso de prueba calcular el factorial de 5
+// Test Case calculate 5 factorial 
 console.log(factorial.de(5));
-// Caso de prueba calcular el factorial de 3
+// Test Case calculate 3 factorial 
 console.log(factorial.de(3));
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
@@ -109,10 +109,10 @@ console.log(factorial.de(3));
 		scrollbarStyle: 'null'
 	});
 
-	var modal_click_message = "Error, haz click para entender el concepto y modifica la función para imprimir los valores esperados";
-	var error_message = `El factorial de un número entero no negativo 𝑛 (denotado como 𝑛!) es el producto de todos los enteros positivos menores o iguales a 
-				𝑛. Por ejemplo, 5!=5×4×3×2×1=120. El factorial de 0 está definido como 1 (0!=1).`;
-	var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola";
+	var modal_click_message = "";
+	var error_message = `The factorial of a non-negative integer 𝑛 (denoted as 𝑛!) is the product of all positive integers 
+        less than or equal to 𝑛. For example, 5! = 5 × 4 × 3 × 2 × 1 = 120. The factorial of 0 is defined as 1 (0! = 1).`;
+	var success_message = "You've mastered the concept of factorials! Keep challenging yourself and pushing your limits in the world of mathematics and programming. Well done! 🚀👏";
 
 	function logToConsole(message, color) {
 		const consoleElement = document.getElementById('console');
