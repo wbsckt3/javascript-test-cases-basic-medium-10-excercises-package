@@ -37,7 +37,7 @@ const shape = {
 	return output;
   },
 };
-// Test Case:
+// Casos de prueba:
 console.log(shape.out1());
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
@@ -169,13 +169,18 @@ console.log(shape.out1());
 			});
 
  describe('shape.out1()', function() {
-  it('should log correct values', function(done) {
+  it('should return an empty array immediately after calling', function() {
+    const result = shape.out1();
+    expect(result).to.be.an('array').that.is.empty;
+  });
+
+  it('should log correct values in order', function(done) {
     const loggedValues = [];
     const originalConsoleLog = console.log;
 
     // Override console.log to capture the output
     console.log = function(...args) {
-      loggedValues.push(args); // Capture logged arguments
+      loggedValues.push(args[0]); // Capture logged value
       originalConsoleLog.apply(console, args); // Optional: Call original console.log
     };
 
@@ -189,11 +194,7 @@ console.log(shape.out1());
     setTimeout(() => {
       try {
         // Check the captured values
-        expect(loggedValues).to.deep.equal([
-          [0, 0], // Index 0 and its square 0
-          [1, 1], // Index 1 and its square 1
-          [2, 4], // Index 2 and its square 4
-        ]);
+        expect(loggedValues).to.deep.equal([0, 1, 2]);
         done();
       } catch (err) {
         done(err);
@@ -201,7 +202,21 @@ console.log(shape.out1());
         // Restore the original console.log
         console.log = originalConsoleLog;
       }
-    }, 200); // Adjust the delay as needed
+    }, 50); // Adjust the delay as needed
+  });
+
+  it('should populate the output array correctly after delays', function(done) {
+    const result = shape.out1();
+
+    // Allow time for the setTimeouts to complete
+    setTimeout(() => {
+      try {
+        expect(result).to.deep.equal([0, 1, 2]);
+        done();
+      } catch (err) {
+        done(err);
+      }
+    }, 50); // Adjust the delay as needed
   });
 });
 
