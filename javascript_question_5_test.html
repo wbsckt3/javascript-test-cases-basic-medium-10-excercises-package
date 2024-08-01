@@ -37,7 +37,7 @@ const shape = {
         return mouse;
     }
 };
-// Casos de prueba:
+// Test cases:
 const mouse = shape.out1();
 console.log(mouse.bird.size);
 console.log(mouse[mouse.bird.size]); 
@@ -48,7 +48,7 @@ console.log(mouse[mouse.bird["size"]]);
     </div>
     <div id="app-container">
         <div id="app">
-	    <h5>Exercise 5: Objects </h5>
+	    <h5>Exercise 5: Bracket Notation vs. Dot Notation in JavaScript </h5>
             <p id="modify-message">Modify the function to allow printing: mouse.bird.size</p>
 	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
         </div>
@@ -115,26 +115,18 @@ console.log(mouse[mouse.bird["size"]]);
 		scrollbarStyle: 'null'
 	});
 
-	var modal_click_message = "Error, haz click para entender el concepto y modifica la función para imprimir los valores esperados";
-	var error_message = `
-			En JavaScript, todas las keys son cadenas (a menos que sea un símbolo). 
-			A pesar de que no podríamos escribirlos como cadenas, siempre funcionan 
-			como cadenas de manera interna.
-			\n\n
-			JavaScript interpreta declaraciones. Cuando usamos la notación de 
-			corchetes, ve el corchete de apertura [ y continúa hasta que encuentra 
-			el corchete de cierre ]. Solo de esta manera se evaluará la afirmación.
-			\n\n
-			mouse [bird.size]: Primero evalúa bird.size, que es 'small'. 
-			mouse ["small"] devuelve true.
-			\n\n
-			Sin embargo, con la notación de puntos, esto no sucede. mouse no tiene 
-			una clave llamada bird, lo que significa que mouse.bird es undefined. 
-			Luego, pedimos el tamaño usando la notación de puntos: mouse.bird.size. 
-			Como mouse.bird es undefined, en realidad estamos preguntando 
-			undefined.size. Esto no es válido y generará un error similar al 
-			"Cannot read property 'size' of undefined".`;
-	var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola";
+	var modal_click_message = "";
+	var error_message = `In JavaScript, all keys are strings (unless they are symbols). Even if we don't write them as strings, they 
+        always work as strings internally.<br><br>
+	JavaScript interprets statements. When we use bracket notation, it sees the opening bracket [ and continues until it finds the 
+        closing bracket ]. Only then does it evaluate the expression.<br><br>
+        mouse[bird.size]: First, it evaluates bird.size, which is 'small'. Then, mouse["small"] returns true.
+        <br><br>
+        However, this doesn't happen with dot notation. The mouse object doesn't have a key called bird, which means mouse.bird is undefined. 
+	Then, when we ask for the size using dot notation: mouse.bird.size. Since mouse.bird is undefined, we're actually asking undefined.size. 
+        This is invalid and will throw an error like "Cannot read property 'size' of undefined".`;
+	var success_message = `You've successfully completed this JavaScript challenge! Keep up the great work and continue exploring the 
+		              fascinating world of programming! 🚀👏`
 
 	function logToConsole(message, color) {
 		const consoleElement = document.getElementById('console');
