@@ -115,29 +115,27 @@ console.log(shape.out1(
 		scrollbarStyle: 'null'
 	});
 
-	var modal_click_message = "Error, haz click para entender el concepto y modifica la función para imprimir los valores esperados";
-	var error_message = `**Function Definition:**
-
-- 'shape' is an object with a method 'out1'.
-- The 'out1' method takes an array ('arr') and a callback function ('callback') as inputs.
-
-**Using 'reduce':**
-
-- Inside the 'out1' method, the 'reduce' function is used to iterate over the array and transform its elements based on the callback function.
-- 'reduce' takes two arguments: a reducer function and an initial value (an empty array '[]' in this case).
-
-**Callback Function:**
-
-- The callback function is applied to each element of the array to produce a new transformed value.
-- The transformed values are accumulated into a new array.
-
-**Test Cases:**
-
-- **Duplicating Elements**: Each element in the array '[1, 2, 3]' is doubled, resulting in '[2, 4, 6]'.
-- **Mapping Strings to Lengths**: Each string in the array '['apple', 'banana', 'orange']' is mapped to its length, resulting in '[5, 6, 6]'.
-- **Mapping Objects to Property Values**: Each object in the array is mapped to its 'age' property, resulting in '[30, 25, 40]'.
+	var modal_click_message = "";
+	var error_message = `Function Definition:
+<br><br>
+shape is an object with a method out1.<br>
+The out1 method takes an array (arr) and a callback function (callback) as inputs.<br><br>
+Using reduce:
+<br><br>
+Inside the out1 method, the reduce function iterates over the array and transforms its elements based on the callback function.<br>
+reduce takes two arguments: a reducer function and an initial value (an empty array [] in this case).<br><br>
+Callback Function:
+<br><br>
+The callback function is applied to each element of the array to produce a new transformed value.<br>
+These transformed values are accumulated into a new array.<br><br>
+Test Cases:
+<br><br>
+- Duplicating Elements: Each element in the array [1, 2, 3] is doubled, resulting in [2, 4, 6].<br>
+- Mapping Strings to Lengths: Each string in the array ['apple', 'banana', 'orange'] is mapped to its length, resulting in [5, 6, 6].<br>
+- Mapping Objects to Property Values: Each object in the array is mapped to its age property, resulting in [30, 25, 40]<br>
 `;
-	var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola";
+	var success_message = `Fantastic work on mastering the reduce method! 🎉 You've shown great skill in handling array transformations 
+		and summarizing data efficiently. Keep pushing your JavaScript skills to new heights! 💪🌟`
 
 	function logToConsole(message, color) {
 		const consoleElement = document.getElementById('console');
