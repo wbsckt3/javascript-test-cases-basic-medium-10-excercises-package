@@ -27,14 +27,15 @@
     <textarea id="code-editor">
 const factorial = {
 	de(n) {
-		// Base Case: factorial of 0 es 1
+		// Base Case: factorial of 0 is 1
 		if (n === 0) return 1; 
-		// Now construct a recursive call to calculate the factorial of n-1
+		// Llamada recursiva para calcular el factorial de n-1
+		return n * factorial.de(n - 1); 
 	}
 };
-// Test Case calculate 5 factorial 
+// Test Case: calculate factorial of 5
 console.log(factorial.de(5));
-// Test Case calculate 3 factorial 
+// Test Case: calculate factorial of 3
 console.log(factorial.de(3));
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
