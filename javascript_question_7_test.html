@@ -111,9 +111,17 @@ console.log(shape.out2(100));
 	});
 
 	var modal_click_message = "Error, haz click para entender el concepto y modifica la función para imprimir los valores esperados";
-	var error_message = `El factorial de un número entero no negativo 𝑛 (denotado como 𝑛!) es el producto de todos los enteros positivos menores o iguales a 
-				𝑛. Por ejemplo, 5!=5×4×3×2×1=120. El factorial de 0 está definido como 1 (0!=1).`;
-	var success_message = "Ok! haz modificado la función para mostrar correctamente los mensajes en consola";
+	var error_message = `Concept Explanation: Object Methods and this Keyword<br><br>
+In JavaScript, objects can have methods, which are functions defined as properties of the object. These methods can access and modify the object's properties, or they can call other methods within the same object using the this keyword. The this keyword refers to the object on which the method is called.
+<br><br>
+Analysis of the Code<br><br>
+Method Definitions:
+<br><br>
+The shape object contains two methods: out1 and out2.<br><br>
+out1 is supposed to convert a temperature from Celsius to Fahrenheit.<br>
+out2 is intended to use out1 to perform the conversion.`;
+	var success_message = `Great job on completing this challenging task! 🌟 Your hard work and determination have paid off, and you've demonstrated a solid understanding of 
+		JavaScript object methods and the this keyword. Keep up the excellent work! 🚀`
 
 	function logToConsole(message, color) {
 		const consoleElement = document.getElementById('console');
