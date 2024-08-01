@@ -168,47 +168,48 @@ console.log(shape.out1());
 				}
 			});
 
- describe('shape.out1()', function() {
+const { expect } = chai;
+
+describe('shape.out1()', function() {
+  beforeEach(function() {
+    // Limpia la consola antes de cada prueba
+    console.log = this.originalConsoleLog || console.log;
+    this.loggedValues = [];
+    this.originalConsoleLog = console.log;
+    console.log = (...args) => {
+      this.loggedValues.push(args[0]); // Captura el valor registrado
+      this.originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
+  });
+
+  afterEach(function() {
+    // Restaura console.log después de cada prueba
+    console.log = this.originalConsoleLog;
+  });
+
   it('should return an empty array immediately after calling', function() {
     const result = shape.out1();
     expect(result).to.be.an('array').that.is.empty;
   });
 
   it('should log correct values in order', function(done) {
-    const loggedValues = [];
-    const originalConsoleLog = console.log;
-
-    // Override console.log to capture the output
-    console.log = function(...args) {
-      loggedValues.push(args[0]); // Capture logged value
-      originalConsoleLog.apply(console, args); // Optional: Call original console.log
-    };
-
-    // Clear previous logs
-    loggedValues.length = 0;
-
-    // Run the function
     shape.out1();
 
-    // Allow time for the setTimeouts to complete
+    // Espera un poco para asegurarse de que los setTimeouts se hayan ejecutado
     setTimeout(() => {
       try {
-        // Check the captured values
-        expect(loggedValues).to.deep.equal([0, 1, 2]);
+        expect(this.loggedValues).to.deep.equal([0, 1, 2]);
         done();
       } catch (err) {
         done(err);
-      } finally {
-        // Restore the original console.log
-        console.log = originalConsoleLog;
       }
-    }, 50); // Adjust the delay as needed
+    }, 50);
   });
 
   it('should populate the output array correctly after delays', function(done) {
     const result = shape.out1();
 
-    // Allow time for the setTimeouts to complete
+    // Espera un poco para asegurarse de que los setTimeouts se hayan ejecutado
     setTimeout(() => {
       try {
         expect(result).to.deep.equal([0, 1, 2]);
@@ -216,9 +217,10 @@ console.log(shape.out1());
       } catch (err) {
         done(err);
       }
-    }, 50); // Adjust the delay as needed
+    }, 50);
   });
 });
+
 
 
 			it('should identify falsy values', function() {
