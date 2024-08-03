@@ -158,28 +158,6 @@ console.log(shape.out1());
 
 		// Define test cases
 		const expect = chai.expect;
-		describe('JavaScript Code Tests', function() {
-			it('should execute without errors', function(done) {
-				try {
-					new Function(userCode)();
-					done();
-				} catch (e) {
-					done(e);
-				}
-			});
-
-const { expect } = chai;
-
-const shape = {
-  out1() {
-    let output = [];
-    for (let i = 0; i < 3; i++) {
-      console.log(i);
-      output.push(i);
-    }
-    return output;
-  },
-};
 
 describe('shape.out1()', function() {
   let loggedValues;
@@ -210,6 +188,7 @@ describe('shape.out1()', function() {
     expect(loggedValues).to.deep.equal([0, 1, 2]); // Este test debería pasar porque los valores de consola son correctos
   });
 });
+
 
 
 		// Variable para rastrear el estado de los tests
