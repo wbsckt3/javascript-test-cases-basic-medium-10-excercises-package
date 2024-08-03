@@ -181,50 +181,29 @@ const shape = {
   },
 };
 
-// Suite de pruebas
-describe('shape.out1()', function() {
+describe("shape.out1 Method", function() {
+  let originalLog;
   let loggedValues;
-  let originalConsoleLog;
 
   beforeEach(function() {
-    // Almacenar la función original de console.log y los valores registrados
     loggedValues = [];
-    originalConsoleLog = console.log;
-    console.log = (...args) => {
-      loggedValues.push(args[0]); // Captura el valor registrado
-      originalConsoleLog.apply(console, args); // Llama al original console.log
-    };
+    originalLog = console.log;
+    console.log = (msg) => loggedValues.push(msg);
   });
 
   afterEach(function() {
-    // Restaura console.log después de cada prueba
-    console.log = originalConsoleLog;
+    console.log = originalLog;
   });
 
-	
   it('should return an array with values [0, 1, 2]', function() {
     const result = shape.out1();
     expect(result).to.deep.equal([0, 1, 2]); // Este test fallará
   });
 
   it('should log the values 0, 1, and 2 in order', function() {
-    // Capturamos los valores loggeados
-    const loggedValues = [];
-    const originalLog = console.log;
-    console.log = (msg) => loggedValues.push(msg);
-
     shape.out1();
-
     expect(loggedValues).to.deep.equal([0, 1, 2]); // Este test también fallará
-
-    // Restauramos console.log
-    console.log = originalLog;
   });
-
-	
-	
-});
-
 
 
 			it('should identify falsy values', function() {
