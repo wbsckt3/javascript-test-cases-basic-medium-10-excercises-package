@@ -204,29 +204,7 @@ describe("shape.out1 Method", function() {
     shape.out1();
     expect(loggedValues).to.deep.equal([0, 1, 2]); // Este test también fallará
   });
-
-
-			it('should identify falsy values', function() {
-				expect(false).to.not.be.ok;
-				expect(0).to.not.be.ok;
-				expect('').to.not.be.ok;
-				expect(null).to.not.be.ok;
-				expect(undefined).to.not.be.ok;
-				expect(NaN).to.not.be.ok;
-			});
-
-			it('should define variables correctly', function() {
-				let testVar = 123;
-				expect(testVar).to.equal(123);
-			});
-
-			it('should define and call functions correctly', function() {
-				function testFunction() {
-					return 'Hello, World!';
-				}
-				expect(testFunction()).to.equal('Hello, World!');
-			});
-		});
+});
 
 		// Variable para rastrear el estado de los tests
 		let allTestsPassed = true;
