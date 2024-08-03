@@ -27,16 +27,18 @@
         <textarea id="code-editor">
 const shape = {
   out1() {
-	return name;
+	// write here code
   },
   out2() {
-	return age;
+        // write here code
   },
   name: 'Refactorii',
   age: 21,
 };
-// Casos de prueba:
+// Test cases:
+// return name		
 console.log(shape.out1());
+// return age
 console.log(shape.out2());
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
@@ -165,6 +167,26 @@ console.log(shape.out2());
                 // Define test cases
                 const expect = chai.expect;
                 describe('JavaScript Code Tests', function() {
+
+		 let loggedValues;
+  let originalConsoleLog;
+
+  beforeEach(function() {
+    // Almacenar la función original de console.log y los valores registrados
+    loggedValues = [];
+    originalConsoleLog = console.log;
+    console.log = (...args) => {
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
+  });
+
+  afterEach(function() {
+    // Restaura console.log después de cada prueba
+    console.log = originalConsoleLog;
+  });
+
+			
                     it('should execute without errors', function(done) {
                         try {
                             new Function(userCode)();
