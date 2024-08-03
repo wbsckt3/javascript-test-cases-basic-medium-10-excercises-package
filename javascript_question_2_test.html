@@ -28,9 +28,9 @@
 const shape = {
   out1() {
     let output = [];
-    for (let i = 0; i < 3; i+1) {
+    for (let i = 0; i < 3; i+=2) {
         console.log(i);
-        output.(i);
+        output.push(i);
     }
     return output;
   },
@@ -210,6 +210,21 @@ describe('shape.out1()', function() {
     shape.out1();
     expect(loggedValues).to.deep.equal([0, 1, 2]);
   });
+
+ // Nuevo test case para activar el botón reintentar
+  it("should fail and activate retry button due to incorrect log output", function() {
+    const originalLog = console.log;
+    const logOutput = [];
+    console.log = (msg) => logOutput.push(msg);
+
+    shape.out1();
+
+    // Verificar que los valores no están en el orden esperado
+    assert.notDeepEqual(logOutput, [0, 1, 2]);
+
+    console.log = originalLog; // Restore original console.log
+  });
+	
 });
 
 
