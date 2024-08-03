@@ -28,9 +28,9 @@
 const shape = {
   out1() {
     let output = [];
-    for (let i = 0; i < 3; i+=2) {
+    for (let i = 0; i < 3; i++) {
         console.log(i);
-        output.push(i);
+        //output.push(i);
     }
     return output;
   },
@@ -201,29 +201,27 @@ describe('shape.out1()', function() {
     console.log = originalConsoleLog;
   });
 
+	
   it('should return an array with values [0, 1, 2]', function() {
     const result = shape.out1();
-    expect(result).to.deep.equal([0, 1, 2]);
+    expect(result).to.deep.equal([0, 1, 2]); // Este test fallará
   });
 
   it('should log the values 0, 1, and 2 in order', function() {
-    shape.out1();
-    expect(loggedValues).to.deep.equal([0, 1, 2]);
-  });
-
- // Nuevo test case para activar el botón reintentar
-  it("should fail and activate retry button due to incorrect log output", function() {
+    // Capturamos los valores loggeados
+    const loggedValues = [];
     const originalLog = console.log;
-    const logOutput = [];
-    console.log = (msg) => logOutput.push(msg);
+    console.log = (msg) => loggedValues.push(msg);
 
     shape.out1();
 
-    // Verificar que los valores no están en el orden esperado
-    assert.notDeepEqual(logOutput, [0, 1, 2]);
+    expect(loggedValues).to.deep.equal([0, 1, 2]); // Este test también fallará
 
-    console.log = originalLog; // Restore original console.log
+    // Restauramos console.log
+    console.log = originalLog;
   });
+
+	
 	
 });
 
