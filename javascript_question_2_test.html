@@ -181,30 +181,60 @@ const shape = {
   },
 };
 
-describe("shape.out1 Method", function() {
-  let originalLog;
+// Suite de pruebas
+describe('shape.out1()', function() {
   let loggedValues;
+  let originalConsoleLog;
 
   beforeEach(function() {
+    // Almacenar la función original de console.log y los valores registrados
     loggedValues = [];
-    originalLog = console.log;
-    console.log = (msg) => loggedValues.push(msg);
+    originalConsoleLog = console.log;
+    console.log = (...args) => {
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
   });
 
   afterEach(function() {
-    console.log = originalLog;
+    // Restaura console.log después de cada prueba
+    console.log = originalConsoleLog;
   });
 
   it('should return an array with values [0, 1, 2]', function() {
     const result = shape.out1();
-    expect(result).to.deep.equal([0, 1, 2]); // Este test fallará
+    expect(result).to.deep.equal([0, 1, 2]);
   });
 
   it('should log the values 0, 1, and 2 in order', function() {
     shape.out1();
-    expect(loggedValues).to.deep.equal([0, 1, 2]); // Este test también fallará
+    expect(loggedValues).to.deep.equal([0, 1, 2]);
   });
 });
+
+
+
+			it('should identify falsy values', function() {
+				expect(false).to.not.be.ok;
+				expect(0).to.not.be.ok;
+				expect('').to.not.be.ok;
+				expect(null).to.not.be.ok;
+				expect(undefined).to.not.be.ok;
+				expect(NaN).to.not.be.ok;
+			});
+
+			it('should define variables correctly', function() {
+				let testVar = 123;
+				expect(testVar).to.equal(123);
+			});
+
+			it('should define and call functions correctly', function() {
+				function testFunction() {
+					return 'Hello, World!';
+				}
+				expect(testFunction()).to.equal('Hello, World!');
+			});
+		});
 
 		// Variable para rastrear el estado de los tests
 		let allTestsPassed = true;
