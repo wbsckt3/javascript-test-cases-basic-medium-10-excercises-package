@@ -27,10 +27,10 @@
     <textarea id="code-editor">
 const factorial = {
 	de(n) {
-		// Base Case: factorial of 0 is 1
-		if (n === 0) return 1; 
-		// Llamada recursiva para calcular el factorial de n-1
-		return n * factorial.de(n - 1); 
+		// consider the base case: factorial of 0 is 1
+		// ...
+		// create a recursive call to calculate the factorial of n-1
+	        // ...
 	}
 };
 // Test Case: calculate factorial of 5
@@ -171,6 +171,25 @@ console.log(factorial.de(3));
 			});
 
 			describe('Factorial Function Tests', function() {
+
+ let loggedValues;
+  let originalConsoleLog;
+
+  beforeEach(function() {
+    // Almacenar la función original de console.log y los valores registrados
+    loggedValues = [];
+    originalConsoleLog = console.log;
+    console.log = (...args) => {
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
+  });
+
+  afterEach(function() {
+    // Restaura console.log después de cada prueba
+    console.log = originalConsoleLog;
+  });
+				
 				it('should log correct values', function(done) {
 					const output = [];
 					const originalConsoleLog = console.log;
