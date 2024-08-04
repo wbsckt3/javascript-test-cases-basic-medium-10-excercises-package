@@ -27,10 +27,11 @@
         <textarea id="code-editor">
 // Function input = array and an arrow function callback
 const shape = {
-  out1(arr, callback) {
-    return arr.reduce((acc, current) => {
-      return [...acc, callback(current)]; // Create a new array with the transformed value
-    }, []);
+/* Define a function out1 that takes two parameters: an array arr and a callback function. */
+/* Use reduce: The reduce method is used to iterate over the array arr and transform each element using the callback function. The reduce method takes two arguments: a reducer function and an initial value ([]). */
+/* Reducer Function: The reducer function takes two arguments: an accumulator (acc) and the current element (current). Within the reducer function, apply the callback function to the current element. Create a new array by using the spread operator (...) to combine the accumulator (acc) with the transformed value (callback(current)). */
+/* Initial Value: The initial value of the accumulator is an empty array [].*/
+/* Transforming Elements: As the reduce method iterates over the array, it applies the callback function to each element and accumulates the transformed values into a new array by creating a new array with each iteration. */
   }
 };
 // Test cases:
@@ -182,6 +183,25 @@ Test Cases:
 		// Define test cases
 		const expect = chai.expect;
 		describe('JavaScript Code Tests', function() {
+
+  let loggedValues;
+  let originalConsoleLog;
+
+  beforeEach(function() {
+    // Almacenar la función original de console.log y los valores registrados
+    loggedValues = [];
+    originalConsoleLog = console.log;
+    console.log = (...args) => {
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
+  });
+
+  afterEach(function() {
+    // Restaura console.log después de cada prueba
+    console.log = originalConsoleLog;
+  });
+			
 			it('should execute without errors', function(done) {
 				try {
 					new Function(userCode)();
