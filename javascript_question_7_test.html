@@ -27,16 +27,19 @@
         <textarea id="code-editor">
 const shape = {
 	out1(celsius) {
-		let fahrenheit = celsius * (9 / 5) + 32;
+		// Define here the fahrenheit variable to calculate celsius
 		return fahrenheit;
 	},
 	out2(celsius) {
-		return this.out1(celsius);
+		// How do you use here the function out1 to calculate Fahrenheit?
 	}
 };
 // Test Case:
+// calculate how many degrees fahrenheit are 0 degrees celsius
 console.log(shape.out1(0));
+// calculate how many degrees fahrenheit are -40 degrees celsius	
 console.log(shape.out2(-40));
+// calculate how many degrees fahrenheit are 100 degrees celsius
 console.log(shape.out2(100));
         </textarea>
 		<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
@@ -180,6 +183,25 @@ out2 is intended to use out1 to perform the conversion.`;
 			});
 
 			describe('Convert', function() {
+
+  let loggedValues;
+  let originalConsoleLog;
+
+  beforeEach(function() {
+    // Almacenar la función original de console.log y los valores registrados
+    loggedValues = [];
+    originalConsoleLog = console.log;
+    console.log = (...args) => {
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
+  });
+
+  afterEach(function() {
+    // Restaura console.log después de cada prueba
+    console.log = originalConsoleLog;
+  });
+				
 				it('should log correct values', function(done) {
 					const output = [];
 					const originalConsoleLog = console.log;
