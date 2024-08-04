@@ -27,43 +27,38 @@
         <textarea id="code-editor">
 const shape = {
   out1() {
-	// null
-	let a = null;
-	return `Valor de a: ${a}`;
+	// How do you define a to print null ?
+	return `value of a: ${a}`;
   },
   out2() {
-	// undefined
-	let b;
-	return `Valor de b: ${b}`;
+	// How do you define b to print undefined ?
+	return `value of b: ${b}`;
   },
   out3() {
-	// 0
-	let c = 0;
+	// How do you define c to print false ?
 	if (!c) {
-	  return 'c es falsy'; 
+	  return 'c of falsy'; 
 	}
   },
   out4() {
-	// false
-	let d = false;
+	// How do you define d to print false ?
 	if (!d) {
-	  return 'd es falsy';
+	  return 'd of falsy';
 	}
   },
   out5() {
-	// NaN
-	let e = NaN;
-	const output1 = `Valor de e: ${e}`; 
+	// How do you define c to print NaN;
+	const output1 = `Value of e: ${e}`; 
 	const output2 = `NaN === NaN: ${NaN === NaN}`; // NaN === NaN: false
 	return [output1, output2];
   }
 };
 // Casos de prueba:
-console.log(shape.out1()); // espera null
-console.log(shape.out2()); // espera undefined
-console.log(shape.out3()); // espera c es falsy
-console.log(shape.out4()); // espera d es falsy
-console.log(shape.out5()); // espera NaN
+console.log(shape.out1()); // expect null
+console.log(shape.out2()); // expect undefined
+console.log(shape.out3()); // expect c es falsy
+console.log(shape.out4()); // expect d es falsy
+console.log(shape.out5()); // expect NaN
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
@@ -200,6 +195,25 @@ console.log(shape.out5()); // espera NaN
 			});
 
 			describe('JavaScript Primitive Values Explanations', function() {
+
+  let loggedValues;
+  let originalConsoleLog;
+
+  beforeEach(function() {
+    // Almacenar la función original de console.log y los valores registrados
+    loggedValues = [];
+    originalConsoleLog = console.log;
+    console.log = (...args) => {
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
+  });
+
+  afterEach(function() {
+    // Restaura console.log después de cada prueba
+    console.log = originalConsoleLog;
+  });    
+				
 			  it('should explain null value correctly', function(done) {
 				const output = [];
 				const originalConsoleLog = console.log;
