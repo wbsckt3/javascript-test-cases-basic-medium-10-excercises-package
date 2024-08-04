@@ -27,23 +27,18 @@
         <textarea id="code-editor">
 const shape = {
     out1() {
-        const bird = {
-            size: "small"
-        };
-        const mouse = {
-            name: "Mickey",
-            small: true,
-            bird: bird
-        };
+
+        // How do you define here the mouse object and bird object
+        // to print in console the test cases?
+		
         return mouse;
     }
 };
-// Test Case:
+// Test Cases:
 const mouse = shape.out1();
 console.log(mouse.bird.size);
 console.log(mouse[mouse.bird.size]); 
 console.log(mouse[mouse.bird["size"]]); 
-        </textarea>
         </textarea>
 		<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
@@ -186,23 +181,26 @@ console.log(mouse[mouse.bird["size"]]);
 			});
 
 			describe('shape.out1()', function() {
+
+  let loggedValues;
+  let originalConsoleLog;
+
+  beforeEach(function() {
+    // Almacenar la función original de console.log y los valores registrados
+    loggedValues = [];
+    originalConsoleLog = console.log;
+    console.log = (...args) => {
+      loggedValues.push(args[0]); // Captura el valor registrado
+      originalConsoleLog.apply(console, args); // Llama al original console.log
+    };
+  });
+
+  afterEach(function() {
+    // Restaura console.log después de cada prueba
+    console.log = originalConsoleLog;
+  });
+				
 				let mouse;
-				before(function() {
-					const shape = {
-						out1() {
-							const bird = {
-								size: "small"
-							};
-							const mouse = {
-								name: "Mickey",
-								small: true,
-								bird: bird
-							};
-							return mouse;
-						}
-					};
-					mouse = shape.out1();
-				});
 
 				it('should throw error for mouse.bird.size', function() {
 					expect(mouse.bird.size).to.equal("small");
