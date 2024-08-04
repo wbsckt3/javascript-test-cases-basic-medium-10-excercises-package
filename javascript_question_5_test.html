@@ -201,6 +201,23 @@ console.log(mouse[mouse.bird["size"]]);
   });
 				
 				let mouse;
+				before(function() {
+					const shape = {
+						out1() {
+							const bird = {
+								size: "small"
+							};
+							const mouse = {
+								name: "Mickey",
+								small: true,
+								bird: bird
+							};
+							return mouse;
+						}
+					};
+					mouse = shape.out1();
+				});
+
 
 				it('should throw error for mouse.bird.size', function() {
 					expect(mouse.bird.size).to.equal("small");
