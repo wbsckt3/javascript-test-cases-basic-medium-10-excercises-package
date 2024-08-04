@@ -230,37 +230,37 @@ console.log(shape.out5()); // expect NaN
 				  const shape = {
 					out1() {
 					  let a = null;
-					  return \`Valor de a: \${a}\`;
+					  return \`Value of a: \${a}\`;
 					},
 					out2() {
 					  let b;
-					  return \`Valor de b: \${b}\`;
+					  return \`Value of b: \${b}\`;
 					},
 					out3() {
 					  let c = 0;
 					  if (!c) {
-						return 'c es falsy';
+						return 'c is falsy';
 					  }
 					},
 					out4() {
 					  let d = false;
 					  if (!d) {
-						return 'd es falsy'; 
+						return 'd is falsy'; 
 					  }
 					},
 					out5() {
 					  let e = NaN;
-					  const output1 = \`Valor de e: \${e}\`;
+					  const output1 = \`Value of e: \${e}\`;
 					  const output2 = \`NaN === NaN: \${NaN === NaN}\`;
 					  return [output1, output2];
 					}
 				  };
 
-				  console.log(shape.out1()); // espera null
-				  console.log(shape.out2()); // espera undefined
-				  console.log(shape.out3()); // espera c es falsy
-				  console.log(shape.out4()); // espera d es falsy
-				  console.log(shape.out5()); // espera NaN
+				  console.log(shape.out1()); // expect null
+				  console.log(shape.out2()); // expect undefined
+				  console.log(shape.out3()); // expect c es falsy
+				  console.log(shape.out4()); // expect d es falsy
+				  console.log(shape.out5()); // expect NaN
 				`)();
 
 				// Allow time for setTimeouts to complete
