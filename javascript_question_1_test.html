@@ -116,6 +116,10 @@ editor.on('blur', () => {
             lineWrapping: true,
             scrollbarStyle: 'null'
         });
+	 // Ensure editor maintains focus
+            editor.on('blur', () => {
+                setTimeout(() => editor.focus(), 0);
+            });
         
         var modal_click_message = `In JavaScript, objects can have methods that access the properties of the same object...`;
         var error_message = `In JavaScript, objects can have methods that access the properties of the same object using the this keyword. However, 
