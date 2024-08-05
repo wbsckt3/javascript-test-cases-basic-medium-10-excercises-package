@@ -75,6 +75,11 @@ console.log(shape.out2());
         </div>
     </div>
     <script>
+editor.on('blur', () => {
+  setTimeout(() => editor.focus(), 0);
+});
+	    
+	    
 		// Obtener el parámetro `token` de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
