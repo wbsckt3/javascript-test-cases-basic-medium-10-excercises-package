@@ -111,7 +111,10 @@ console.log(shape.out2());
             lineNumbers: true,
             mode: 'javascript',
             lineWrapping: true,
-            scrollbarStyle: 'null'
+            scrollbarStyle: 'null',
+		extraKeys: {
+                    'Ctrl-Space': 'autocomplete'
+                }
         });
 	 // Ensure editor maintains focus
             editor.on('blur', () => {
