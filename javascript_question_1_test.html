@@ -24,6 +24,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/cjs/index.min.js"></script>
 </head>
 <body>
+<div id="main-container">
+	
     <div id="editor-container">
         <textarea id="code-editor">
 const shape = {
@@ -44,7 +46,10 @@ console.log(shape.out2());
         </textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
-    </div>
+</div>
+
+<!-- Lado derecho (Contenedor de app, consola y mocha) -->
+<div id="right-container">	
     <div id="app-container">
         <div id="app">
 	    <h5>Exercise 1: Javascript Basic Syntax</h5>
@@ -54,6 +59,10 @@ console.log(shape.out2());
     </div>
     <div id="console-container"><div id="console"></div></div>
     <div id="mocha-container"><div id="mocha"></div></div>
+</div>
+	
+</div>
+	
     <script>mocha.setup('bdd');</script>
 
     <!-- Modal -->
