@@ -136,6 +136,8 @@ console.log(shape.out2());
       const data = await response.json();
       // Extraer solo el mensaje del assistant
       document.getElementById('challenge').textContent = data.choices[0].message.content;
+      const runButton = document.getElementById('ai-assistance');
+      runButton.disabled = true;
     }
     // Vincula la función al botón
     document.getElementById('ai-assistance').addEventListener('click', fetchAIResponse);
