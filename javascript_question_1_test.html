@@ -112,7 +112,7 @@ console.log(shape.out2());
             scrollbarStyle: 'null'
         });
         
-        var modal_click_message = `In JavaScript, objects can have methods that access the properties of the same object...`;
+        //var modal_click_message = ``;
         var error_message = `In JavaScript, objects can have methods that access the properties of the same object using the this keyword. However, 
 	if the methods are not properly defined, they may not return any value or interact with the properties as intended.
         In the given example, shape is an object with properties name and age, and methods out1 and out2. Currently, these methods only access the 
@@ -363,8 +363,9 @@ describe('JavaScript Code Tests', function() {
       });
       // Procesa la respuesta
       const data = await response.json();
-      // Muestra la respuesta en el <pre>
-      document.getElementById('api-response').textContent = JSON.stringify(data, null, 2);
+         // Extraer solo el mensaje del assistant
+      const modal_click_message = data.choices[0].message.content;
+
     }
     // Vincula la función al botón
     document.getElementById('run-button').addEventListener('click', fetchAIResponse);
