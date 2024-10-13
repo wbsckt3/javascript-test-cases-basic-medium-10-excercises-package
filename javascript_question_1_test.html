@@ -44,7 +44,7 @@ console.log(shape.out2());
     </div>
     <div id="app-container">
         <div id="app">
-	    <h5>AI Tutor</h5>
+	    <h5>AI Tutor <button id="ai-assistance">Get AI assitance</button>  </h5>
 	    <h5>Exercise 1: Basic Syntax</h5>
 	    <p id="challenge">To refactor this code, you should modify the methods out1 and out2 to return the values of name and age, respectively. This will allow us to 
         retrieve and use these values when calling the methods</p>
@@ -138,7 +138,7 @@ console.log(shape.out2());
       document.getElementById('challenge').textContent = data.choices[0].message.content;
     }
     // Vincula la función al botón
-    document.getElementById('run-button').addEventListener('click', fetchAIResponse);
+    document.getElementById('ai-assistance').addEventListener('click', fetchAIResponse);
 	    
     function test_cases_scenario(){	    
         const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
