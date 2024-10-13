@@ -139,8 +139,6 @@ console.log(shape.out2());
       // Extraer solo el mensaje del assistant
       document.getElementById('challenge').textContent = data.choices[0].message.content;
     }
-    // Vincula la función al botón
-    document.getElementById('ai-assistance').addEventListener('click', fetchAIResponse);
     // Deshabilitar el botón y ejecutar la función fetchAIResponse
     runButton.addEventListener('click', function() {
       runButton.classList.add('disabled');  // Deshabilita el botón
