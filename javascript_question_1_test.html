@@ -45,8 +45,9 @@ console.log(shape.out2());
     <div id="app-container">
         <div id="app">
 	    <h5>Exercise 1: Basic Syntax</h5>
-            <p id="modify-message">To refactor this code, you should modify the methods out1 and out2 to return the values of name and age, respectively. This will allow us to 
+	    <p id="challenge">To refactor this code, you should modify the methods out1 and out2 to return the values of name and age, respectively. This will allow us to 
         retrieve and use these values when calling the methods</p>
+            <p id="modify-message"></p>
 	    <pre id="api-response"></pre>
 	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
         </div>
@@ -109,7 +110,7 @@ console.log(shape.out2());
       // Obtén el código del textarea
       const code = document.getElementById('code-editor').value;
       // Obtén el mensaje de desafío
-      const challenge = document.getElementById('modify-message').textContent;
+      const challenge = document.getElementById('challenge').textContent;
       const apiKey = 'a6bf17214c0744a0bb984614d4bc26d0'; // Reemplaza con tu clave API real
       const response = await fetch('https://api.aimlapi.com/v1/chat/completions', {
         method: 'POST',
@@ -133,8 +134,8 @@ console.log(shape.out2());
       });
       // Procesa la respuesta
       const data = await response.json();
-         // Extraer solo el mensaje del assistant
-      modal_click_message = data.choices[0].message.content;
+      // Extraer solo el mensaje del assistant
+      document.getElementById('challenge').textContent = data.choices[0].message.content;
     }
     // Vincula la función al botón
     document.getElementById('run-button').addEventListener('click', fetchAIResponse);
