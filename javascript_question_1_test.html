@@ -104,6 +104,41 @@ console.log(shape.out2());
     } else {
 	    document.body.innerHTML = 'Access denied. No token provided.';
     }
+
+    async function fetchAIResponse() {
+      // Obtén el código del textarea
+      const code = document.getElementById('code-editor').value;
+      // Obtén el mensaje de desafío
+      const challenge = document.getElementById('modify-message').textContent;
+      const apiKey = 'a6bf17214c0744a0bb984614d4bc26d0'; // Reemplaza con tu clave API real
+      const response = await fetch('https://api.aimlapi.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`  // Incluye tu API key
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o',  // El modelo que estás usando
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a JavaScript expert. You will review code provided by the user, correct any errors, and explain how it works.'
+            },
+            {
+              role: 'user',
+              content: `Here is my JavaScript code:\n\n${code}\n\nI used this code to solve this challenge: ${challenge}`
+            }
+          ]
+        })
+      });
+      // Procesa la respuesta
+      const data = await response.json();
+         // Extraer solo el mensaje del assistant
+      modal_click_message = data.choices[0].message.content;
+    }
+    // Vincula la función al botón
+    document.getElementById('run-button').addEventListener('click', fetchAIResponse);
+	    
     function test_cases_scenario(){	    
         const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
             lineNumbers: true,
@@ -112,7 +147,7 @@ console.log(shape.out2());
             scrollbarStyle: 'null'
         });
         
-        //var modal_click_message = ``;
+
         var error_message = `In JavaScript, objects can have methods that access the properties of the same object using the this keyword. However, 
 	if the methods are not properly defined, they may not return any value or interact with the properties as intended.
         In the given example, shape is an object with properties name and age, and methods out1 and out2. Currently, these methods only access the 
@@ -334,41 +369,6 @@ describe('JavaScript Code Tests', function() {
 	    }).join(''));
 	    return JSON.parse(jsonPayload);
     }
-
-     async function fetchAIResponse() {
-      // Obtén el código del textarea
-      const code = document.getElementById('code-editor').value;
-      // Obtén el mensaje de desafío
-      const challenge = document.getElementById('modify-message').textContent;
-      const apiKey = 'a6bf17214c0744a0bb984614d4bc26d0'; // Reemplaza con tu clave API real
-      const response = await fetch('https://api.aimlapi.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`  // Incluye tu API key
-        },
-        body: JSON.stringify({
-          model: 'gpt-4o',  // El modelo que estás usando
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a JavaScript expert. You will review code provided by the user, correct any errors, and explain how it works.'
-            },
-            {
-              role: 'user',
-              content: `Here is my JavaScript code:\n\n${code}\n\nI used this code to solve this challenge: ${challenge}`
-            }
-          ]
-        })
-      });
-      // Procesa la respuesta
-      const data = await response.json();
-         // Extraer solo el mensaje del assistant
-      const modal_click_message = data.choices[0].message.content;
-
-    }
-    // Vincula la función al botón
-    document.getElementById('run-button').addEventListener('click', fetchAIResponse);
 	    
     </script>
 </body>
