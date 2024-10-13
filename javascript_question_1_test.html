@@ -106,6 +106,8 @@ console.log(shape.out2());
 	    document.body.innerHTML = 'Access denied. No token provided.';
     }
 
+    // Obtener el botón
+    const runButton = document.getElementById('ai-assistance');	     
     async function fetchAIResponse() {
       // Obtén el código del textarea
       const code = document.getElementById('code-editor').value;
@@ -136,11 +138,16 @@ console.log(shape.out2());
       const data = await response.json();
       // Extraer solo el mensaje del assistant
       document.getElementById('challenge').textContent = data.choices[0].message.content;
-      const runButton = document.getElementById('ai-assistance');
-      runButton.classList.add('disabled');
     }
     // Vincula la función al botón
     document.getElementById('ai-assistance').addEventListener('click', fetchAIResponse);
+    // Deshabilitar el botón y ejecutar la función fetchAIResponse
+    runButton.addEventListener('click', function() {
+      runButton.classList.add('disabled');  // Deshabilita el botón
+      runButton.disabled = true;  // Opcional: También puedes usar el atributo 'disabled'
+      // Ejecutar la función después de deshabilitar el botón
+      fetchAIResponse();
+    });
 	    
     function test_cases_scenario(){	    
         const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
