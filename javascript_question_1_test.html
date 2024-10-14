@@ -163,7 +163,7 @@ console.log(shape.out2());
 	    .then(data => {
 	        if (data.success) {
 	            console.log('AI assistance provided:', data.message);
-	            console.log('Remaining requests:', data.remainingRequests);
+	            document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
 	            // Actualizar la interfaz para reflejar las solicitudes restantes
 	            if (data.remainingRequests <= 0) {
 	                document.getElementById('ai-assistance').disabled = true;
