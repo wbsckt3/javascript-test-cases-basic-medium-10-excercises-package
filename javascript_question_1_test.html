@@ -99,9 +99,11 @@ console.log(shape.out2());
             	     document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
             	     // Si tiene solicitudes restantes, habilitar el botón
                      if (data.remainingRequests > 0) {
-                        document.getElementById('ai-assistance').disabled = false;
+			const sendResponseButton = document.getElementById('ai-assistance');
+			sendResponseButton.classList.add('enabled');
                      } else {
-                        document.getElementById('ai-assistance').disabled = true;
+                        const sendResponseButton = document.getElementById('ai-assistance');
+			sendResponseButton.classList.add('disabled');
                      }
 			
 	        } else {
