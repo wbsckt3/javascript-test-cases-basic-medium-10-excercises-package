@@ -76,7 +76,7 @@ console.log(shape.out2());
         </div>
     </div>
     <script>
-		// Obtener el parámetro `token` de la URL
+    // Obtener el parámetro `token` de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     if (token) {
@@ -94,6 +94,16 @@ console.log(shape.out2());
                      localStorage.setItem('recipeId', recipeId);
 	             // Llama a la función de prueba
 	             test_cases_scenario();
+
+                     // Mostrar el número de solicitudes restantes
+            	     console.log(`Remaining AI requests: ${data.remainingRequests}`);
+            	     // Si tiene solicitudes restantes, habilitar el botón
+                     if (data.remainingRequests > 0) {
+                        document.getElementById('ai-assistance').disabled = false;
+                     } else {
+                        document.getElementById('ai-assistance').disabled = true;
+                     }
+			
 	        } else {
 	            console.log(data.valid);
 	            document.body.innerHTML = 'Access denied. Invalid token.';
@@ -139,24 +149,36 @@ console.log(shape.out2());
       // Extraer solo el mensaje del assistant
       document.getElementById('challenge').textContent = data.choices[0].message.content;
     }
-    // Deshabilitar el botón y ejecutar la función fetchAIResponse
-    let aiRequestCount = 0;
-    const maxRequests = 3; // Número máximo de solicitudes permitidas por sesión
-    const runButton = document.getElementById('ai-assistance');
 
-    runButton.addEventListener('click', function() {
-    if (aiRequestCount >= maxRequests) {
-      alert("You have reached the maximum number of AI assistance requests for this session.");
-      runButton.disabled = true;  // Deshabilitar el botón
-      return;
-    }
-
-  // Incrementar el conteo de solicitudes
-  aiRequestCount++;
-  runButton.classList.add('disabled');
-  fetchAIResponse(); // Ejecutar la función de AI
-});
-	    
+	// Al presionar el botón "AI Assistance"
+	document.getElementById('ai-assistance').addEventListener('click', () => {
+	    fetch('https://www.refactorii.com/ai-assistance', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json',
+	        },
+	        body: JSON.stringify({ token })
+	    })
+	    .then(response => response.json())
+	    .then(data => {
+	        if (data.success) {
+	            console.log('AI assistance provided:', data.message);
+	            console.log('Remaining requests:', data.remainingRequests);
+	            // Actualizar la interfaz para reflejar las solicitudes restantes
+	            if (data.remainingRequests <= 0) {
+	                document.getElementById('ai-assistance').disabled = true;
+	            }
+		    fetchAIResponse(); // Ejecutar la función de AI	
+	        } else {
+	            console.log('Error:', data.message);
+	            document.getElementById('ai-assistance').disabled = true; // Deshabilitar el botón si ya no puede hacer más solicitudes
+	        }
+	    })
+	    .catch(error => {
+	        console.error('Error:', error);
+	    });
+	});
+ 	    
     function test_cases_scenario(){	    
         const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
             lineNumbers: true,
