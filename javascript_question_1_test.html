@@ -140,11 +140,22 @@ console.log(shape.out2());
       document.getElementById('challenge').textContent = data.choices[0].message.content;
     }
     // Deshabilitar el botón y ejecutar la función fetchAIResponse
+    let aiRequestCount = 0;
+    const maxRequests = 3; // Número máximo de solicitudes permitidas por sesión
+    const runButton = document.getElementById('ai-assistance');
+
     runButton.addEventListener('click', function() {
-      runButton.classList.add('disabled');  // Deshabilita el botón
-      // Ejecutar la función después de deshabilitar el botón
-      fetchAIResponse();
-    });
+    if (aiRequestCount >= maxRequests) {
+      alert("You have reached the maximum number of AI assistance requests for this session.");
+      runButton.disabled = true;  // Deshabilitar el botón
+      return;
+    }
+
+  // Incrementar el conteo de solicitudes
+  aiRequestCount++;
+  runButton.classList.add('disabled');
+  fetchAIResponse(); // Ejecutar la función de AI
+});
 	    
     function test_cases_scenario(){	    
         const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
