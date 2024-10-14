@@ -24,30 +24,15 @@
 </head>
 <body>
     <div id="editor-container">
-        <textarea id="code-editor">
-const shape = {
-  out1() {
-	
-  },
-  out2() {
-	
-  },
-  name: 'Refactorii',
-  age: 21,
-};
-// Test cases:
-console.log(shape.out1());
-console.log(shape.out2());
-        </textarea>
+        <textarea id="code-editor"></textarea>
 	<img id="logo" src="logo_refactorii.png" alt="Logo Refactorii">
         <button id="run-button">Run</button>
     </div>
     <div id="app-container">
         <div id="app">
 	    <h5>AI Tutor <button id="ai-assistance">Get AI assistance</button> <span id="remaining-requests"></span> </h5>
-	    <h5>Exercise 1: Basic Syntax</h5>
-	    <p id="challenge">To refactor this code, you should modify the methods out1 and out2 to return the values of name and age, respectively. This will allow us to 
-        retrieve and use these values when calling the methods</p>
+	    <h5 id="h5_title></h5>
+	    <p id="challenge"></p>
             <p id="modify-message"></p>
 	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
         </div>
@@ -66,16 +51,17 @@ console.log(shape.out2());
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="errorMessageModalBody">
-                    <!-- Contenido del mensaje de error -->
-                </div>
+                <div class="modal-body" id="errorMessageModalBody"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-    <script>
+</body>
+</html>
+<script>
+	    
     // Obtener el parámetro `token` de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
@@ -117,6 +103,32 @@ console.log(shape.out2());
     } else {
 	    document.body.innerHTML = 'Access denied. No token provided.';
     }
+
+     // Cargar data al HTML:
+     // El código que deseas agregar al textarea
+        const code = `const shape = {
+	  out1() {
+	    
+	  },
+	  out2() {
+	    
+	  },
+	  name: 'Refactorii',
+	  age: 21,
+	};
+	// Test cases:
+	console.log(shape.out1());
+	console.log(shape.out2());
+	`;
+        // Selecciona el textarea y le asigna el código
+        document.getElementById('code-editor').value = code;
+	// titulo del challenge:
+	const h5_title = `Exercise 1: Basic Syntax`;
+	document.getElementById('h5_title').innerText = h5_title;
+	// Texto a agregar al p challenge
+        const paragraphText = `To refactor this code, you should modify the methods out1 and out2 to return the values of name and age, respectively. 
+    	This will allow us to retrieve and use these values when calling the methods.`;
+    	document.getElementById('challenge').innerText = paragraphText;
 
     // Obtener el botón
     const runButton = document.getElementById('ai-assistance');	     
@@ -414,6 +426,5 @@ describe('JavaScript Code Tests', function() {
 	    return JSON.parse(jsonPayload);
     }
 	    
-    </script>
-</body>
-</html>
+</script>
+
