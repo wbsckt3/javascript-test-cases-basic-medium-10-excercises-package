@@ -31,7 +31,7 @@
     <div id="app-container">
         <div id="app">
 	    <h5>AI Tutor <button id="ai-assistance">Get AI assistance</button> <span id="remaining-requests"></span> </h5>
-	    <h5 id="h5_title></h5>
+	    <h5 id="h5_title"></h5>
 	    <p id="challenge"></p>
             <p id="modify-message"></p>
 	    <button id="send-response-button" onClick= "guardarResultados()">Send Response</button>
@@ -123,8 +123,8 @@
         // Selecciona el textarea y le asigna el código
         document.getElementById('code-editor').value = code;
 	// titulo del challenge:
-	const h5_title = `Exercise 1: Basic Syntax`;
-	document.getElementById('h5_title').innerText = h5_title;
+	const title = `Exercise 1: Basic Syntax`;
+	document.getElementById('h5_title').innerText = title;
 	// Texto a agregar al p challenge
         const paragraphText = `To refactor this code, you should modify the methods out1 and out2 to return the values of name and age, respectively. 
     	This will allow us to retrieve and use these values when calling the methods.`;
