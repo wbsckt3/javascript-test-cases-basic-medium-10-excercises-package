@@ -168,13 +168,15 @@ console.log(shape.out2());
 	            document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
 	            // Actualizar la interfaz para reflejar las solicitudes restantes
 	            if (data.remainingRequests <= 0) {
-	                document.getElementById('ai-assistance').disabled = true;
+			const sendResponseButton = document.getElementById('ai-assistance');
+	                document.getElementById('ai-assistance').disabled = false;
 	            }
 		    fetchAIResponse(); // Ejecutar la función de AI	
 	        } else {
 	            console.log('Error:', data.message);
-	            document.getElementById('ai-assistance').disabled = true; // Deshabilitar el botón si ya no puede hacer más solicitudes
-	        }
+	            const sendResponseButton = document.getElementById('ai-assistance'); // Deshabilitar el botón si ya no puede hacer más solicitudes
+	            document.getElementById('ai-assistance').disabled = true;
+		}
 	    })
 	    .catch(error => {
 	        console.error('Error:', error);
