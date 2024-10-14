@@ -44,7 +44,7 @@ console.log(shape.out2());
     </div>
     <div id="app-container">
         <div id="app">
-	    <h5>AI Tutor <button id="ai-assistance">Get AI assistance</button>  </h5>
+	    <h5>AI Tutor <button id="ai-assistance">Get AI assistance</button> <span id="remaining-requests"></span> </h5>
 	    <h5>Exercise 1: Basic Syntax</h5>
 	    <p id="challenge">To refactor this code, you should modify the methods out1 and out2 to return the values of name and age, respectively. This will allow us to 
         retrieve and use these values when calling the methods</p>
@@ -96,7 +96,7 @@ console.log(shape.out2());
 	             test_cases_scenario();
 
                      // Mostrar el número de solicitudes restantes
-            	     console.log(`Remaining AI requests: ${data.remainingRequests}`);
+            	     document.getElementById('remaining-requests').innerText = `Remaining AI requests: ${data.remainingRequests}`;
             	     // Si tiene solicitudes restantes, habilitar el botón
                      if (data.remainingRequests > 0) {
                         document.getElementById('ai-assistance').disabled = false;
